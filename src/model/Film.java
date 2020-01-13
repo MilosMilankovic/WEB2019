@@ -12,11 +12,15 @@ public class Film {
 	private String zemljaPorekla;
 	private int godinaProizvodnje;
 	private String opis;
+	private boolean obrisan;
 	
 	
 	
+	
+
+
 	public Film(int id, String naziv, String reziser, String glumci, String zanrovi, int trajanje, String distributer,
-			String zemljaPorekla, int godinaProizvodnje, String opis) {
+			String zemljaPorekla, int godinaProizvodnje, String opis, boolean obrisan) {
 		super();
 		this.id = id;
 		this.naziv = naziv;
@@ -28,7 +32,9 @@ public class Film {
 		this.zemljaPorekla = zemljaPorekla;
 		this.godinaProizvodnje = godinaProizvodnje;
 		this.opis = opis;
+		this.obrisan = obrisan;
 	}
+
 
 
 
@@ -151,13 +157,28 @@ public class Film {
 	}
 
 
+	public boolean isObrisan() {
+		return obrisan;
+	}
+
+
+
+	public void setObrisan(boolean obrisan) {
+		this.obrisan = obrisan;
+	}
+
+
+
 
 	@Override
 	public String toString() {
 		return "Film [id=" + id + ", naziv=" + naziv + ", reziser=" + reziser + ", glumci=" + glumci + ", zanrovi="
 				+ zanrovi + ", trajanje=" + trajanje + ", distributer=" + distributer + ", zemljaPorekla="
-				+ zemljaPorekla + ", godinaProizvodnje=" + godinaProizvodnje + ", opis=" + opis + "]";
+				+ zemljaPorekla + ", godinaProizvodnje=" + godinaProizvodnje + ", opis=" + opis + ", obrisan=" + obrisan
+				+ "]";
 	}
+
+
 	
 	
 	

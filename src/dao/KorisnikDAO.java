@@ -14,7 +14,7 @@ import model.Korisnik.Uloga;
 
 public class KorisnikDAO {
 
-	public static Korisnik korisnik(String korisnickoIme) {
+	public static Korisnik get(String korisnickoIme) {
 		
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
@@ -82,6 +82,8 @@ public class KorisnikDAO {
 				try {rset.close();} catch (SQLException ex1) {ex1.printStackTrace();}
 		}
 		return null;
+		
+		
 	}
 	
 	
@@ -169,5 +171,6 @@ public class KorisnikDAO {
 				
 		return false;
 	}
+	
 	
 }

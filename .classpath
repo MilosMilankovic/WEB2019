@@ -13,5 +13,10 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="C:/Users/koOoomp/Desktop/jar_files/mysql-connector-java-5.1.47.jar"/>
+	<classpathentry kind="lib" path="C:/Users/koOoomp/Desktop/jar_files/jackson-annotations-2.9.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/koOoomp/Desktop/jar_files/sqlite-jdbc-3.21.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/koOoomp/Desktop/jar_files/jackson-databind-2.9.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/koOoomp/Desktop/jar_files/jackson-core-2.9.5.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
