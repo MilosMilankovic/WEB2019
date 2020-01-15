@@ -98,11 +98,12 @@ public class FilmDAO {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		try {
-				String query = "INSERT INTO filmovi (naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan)"
-								+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				String query = "INSERT INTO film (id, naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan)"
+								+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				pstmt = conn.prepareStatement(query);
 				
 				int index = 1;
+				pstmt.setInt(index++, film.getId());
 				pstmt.setString(index++, film.getNaziv());
 				pstmt.setString(index++, film.getReziser());
 				pstmt.setString(index++, film.getGlumci());
@@ -133,7 +134,7 @@ public class FilmDAO {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		try {
-				String query = "UPDATE filmovi SET naziv = ?, reziser = ?, glumci = ?, zanrovi = ?, trajanje = ?, distributer = ?, zemljaPorekla = ?, godinaProizvodnje = ?, opis = ?, obrisan = ? WHERE id = ?";
+				String query = "UPDATE film SET naziv = ?, reziser = ?, glumci = ?, zanrovi = ?, trajanje = ?, distributer = ?, zemljaPorekla = ?, godinaProizvodnje = ?, opis = ?, obrisan = ? WHERE id = ?";
 				pstmt = conn.prepareStatement(query);
 				
 				int index = 1;
@@ -147,6 +148,7 @@ public class FilmDAO {
 				pstmt.setInt(index++, film.getGodinaProizvodnje());
 				pstmt.setString(index++, film.getOpis());
 				pstmt.setBoolean(index++, film.isObrisan());
+				pstmt.setInt(index++, film.getId());
 				
 				return pstmt.executeUpdate() == 1;
 		
@@ -162,7 +164,28 @@ public class FilmDAO {
 	
 	
 
-	
+	public static boolean delete(Film film) {
+		
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		try {
+				String query = "UPDATE film SET obrisan = ? WHERE id = ?";
+				pstmt = conn.prepareStatement(query);
+				
+				int index = 1;
+				pstmt.setBoolean(index++, true);
+				pstmt.setInt(index++, film.getId());
+				
+				return pstmt.executeUpdate() == 1;
+		
+		} catch (SQLException ex) {
+				System.out.println("Greska u SQL upitu!");
+				ex.printStackTrace();
+		} finally {
+				try {pstmt.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+		}
+		return false;
+	}
 	
 	
 	

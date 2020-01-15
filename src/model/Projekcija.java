@@ -1,30 +1,34 @@
 package model;
 
+import java.util.Date;
+
 public class Projekcija {
 
 	
 	private int id;
 	private String film;
-	private TipProjekcije tipProjekcije;
-	private Sala sala;
-	private String datumIvreme;
-	private int cena;
-	private Korisnik admin;
+	private int tipProjekcije;
+	private int sala;
+	private Date datumIvreme;
+	private int cenaKarte;
+	private int administrator;
+	private boolean obrisan;
 	
 	
 	
 	
 	
-	public Projekcija(int id, String film, TipProjekcije tipProjekcije, Sala sala, String datumIvreme, int cena,
-			Korisnik admin) {
+	public Projekcija(int id, String film, int tipProjekcije, int sala, Date datumIvreme, int cenaKarte,
+			int administrator, boolean obrisan) {
 		super();
 		this.id = id;
 		this.film = film;
 		this.tipProjekcije = tipProjekcije;
 		this.sala = sala;
 		this.datumIvreme = datumIvreme;
-		this.cena = cena;
-		this.admin = admin;
+		this.cenaKarte = cenaKarte;
+		this.administrator = administrator;
+		this.obrisan = obrisan;
 	}
 	
 	
@@ -41,36 +45,49 @@ public class Projekcija {
 	public void setFilm(String film) {
 		this.film = film;
 	}
-	public TipProjekcije getTipProjekcije() {
+	public int getTipProjekcije() {
 		return tipProjekcije;
 	}
-	public void setTipProjekcije(TipProjekcije tipProjekcije) {
+	public void setTipProjekcije(int tipProjekcije) {
 		this.tipProjekcije = tipProjekcije;
 	}
-	public Sala getSala() {
+	public int getSala() {
 		return sala;
 	}
-	public void setSala(Sala sala) {
+	public void setSala(int sala) {
 		this.sala = sala;
 	}
-	public String getDatumIvreme() {
+	public Date getDatumIvreme() {
 		return datumIvreme;
 	}
-	public void setDatumIvreme(String datumIvreme) {
+	public void setDatumIvreme(Date datumIvreme) {
 		this.datumIvreme = datumIvreme;
 	}
-	public int getCena() {
-		return cena;
+	public int getCenaKarte() {
+		return cenaKarte;
 	}
-	public void setCena(int cena) {
-		this.cena = cena;
+	public void setCenaKarte(int cenaKarte) {
+		this.cenaKarte = cenaKarte;
 	}
-	public Korisnik getAdmin() {
-		return admin;
+	public int getAdministrator() {
+		return administrator;
 	}
-	public void setAdmin(Korisnik admin) {
-		this.admin = admin;
+	public void setAdministrator(int administrator) {
+		this.administrator = administrator;
 	}
+
+
+
+	public boolean isObrisan() {
+		return obrisan;
+	}
+
+
+
+	public void setObrisan(boolean obrisan) {
+		this.obrisan = obrisan;
+	}
+	
 	
 	
 	

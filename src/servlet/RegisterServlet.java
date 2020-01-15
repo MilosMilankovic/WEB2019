@@ -1,6 +1,9 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,70 +11,65 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
 import dao.KorisnikDAO;
+
 import model.Korisnik;
 
-public class LoginServlet extends HttpServlet {
+import model.Korisnik.Uloga;
+
+
+
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginServlet() {
-        super();
-       
-    }
+    
+ 
 
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
 	
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+	
 		String status = "success";
-		String korisnickoIme = request.getParameter("username");
-		String lozinka = request.getParameter("password");
+		String korisnickoImen = request.getParameter("username");
+		String lozinkan = request.getParameter("password");
+		System.out.println(korisnickoImen + lozinkan);
 		
 		try {
-			
-			Korisnik korisnik = KorisnikDAO.get(korisnickoIme);
-			if (korisnik == null) {
-				
-				throw new Exception("Pogresno ime ili lozinka");
+			Korisnik existingUser = KorisnikDAO.get(korisnickoImen);
+			if(existingUser != null) {
+				throw new Exception("User already exist!");
 			}
-			if (!korisnik.getLozinka().equals(lozinka)) {
-				throw new Exception("Pogresno ime ili lozinka");
+			else {
+			Date d = new Date();
+			java.sql.Date date = new java.sql.Date(new Date().getTime());
+			//LocalDateTime date = LocalDateTime.now();
+			int id = 0;
+			
+			Korisnik korisnik = new Korisnik(id, korisnickoImen, lozinkan, date, Uloga.KORISNIK, false);
+			KorisnikDAO.add(korisnik);
+
 			}
-			
-			HttpSession session = request.getSession();
-			session.setAttribute("ulogovanKorisnik", korisnik);
-			
-		
-			
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-				status = "failure";
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		
-	
 		Map<String, Object> data = new HashMap<>();
 		data.put("status", status);
-
+		
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonData = mapper.writeValueAsString(data);
 		System.out.println(jsonData);
 
 		response.setContentType("application/json");
 		response.getWriter().write(jsonData);
-		
-	}
 
+	}
 }

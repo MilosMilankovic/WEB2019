@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConnectionManager {
 	
-	private static final String DATABASE = "localhost:3306/cinema";
+	private static final String DATABASE = "localhost:3306/filmovi2";
 	private static final String USER_NAME = "root";
 	private static final String PASSWORD = "root";	
 

@@ -1,11 +1,13 @@
 package model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Korisnik {
 
-public enum Uloga {neprijavljen, korisnik, admin}
+	public enum Uloga {NEPRIJAVLJEN, KORISNIK, ADMIN}
 	
+	private int id;
 	private String korisnickoIme;
 	private String lozinka;
 	private Date datumRegistracije;
@@ -14,13 +16,26 @@ public enum Uloga {neprijavljen, korisnik, admin}
 	
 	
 	
-	public Korisnik(String korisnickoIme, String lozinka, Date datumRegistracije, Uloga uloga, boolean obrisan) {
+	public Korisnik(int id, String korisnickoIme, String lozinka, Date datumRegistracije, Uloga uloga, boolean obrisan) {
 		super();
+		this.id=id;
 		this.korisnickoIme = korisnickoIme;
 		this.lozinka = lozinka;
 		this.datumRegistracije = datumRegistracije;
 		this.uloga = uloga;
 		this.obrisan = obrisan;
+	}
+
+
+
+	public int getId() {
+		return id;
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 

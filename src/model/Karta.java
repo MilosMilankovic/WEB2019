@@ -1,23 +1,27 @@
 package model;
 
+import java.util.Date;
+
 public class Karta {
 	
 	private int id;
-	private Projekcija projekcija;
-	private Sediste sediste;
-	private String datumIvreme;
-	private Korisnik korisnik;
+	private int projekcijaId;
+	private int sediste;
+	private Date datumIvreme;
+	private int korisnik;
+	private boolean obrisan;
 	
 	
 	
 	
-	public Karta(int id, Projekcija projekcija, Sediste sediste, String datumIvreme, Korisnik korisnik) {
+	public Karta(int id, int projekcijaId, int sediste, Date datumIvreme, int korisnik, boolean obrisan) {
 		super();
 		this.id = id;
-		this.projekcija = projekcija;
+		this.projekcijaId = projekcijaId;
 		this.sediste = sediste;
 		this.datumIvreme = datumIvreme;
 		this.korisnik = korisnik;
+		this.obrisan = obrisan;
 	}
 	
 	
@@ -27,32 +31,50 @@ public class Karta {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Projekcija getProjekcija() {
-		return projekcija;
+	
+	
+	
+	public int getProjekcijaId() {
+		return projekcijaId;
 	}
-	public void setProjekcija(Projekcija projekcija) {
-		this.projekcija = projekcija;
+
+
+	public void setProjekcijaId(int projekcijaId) {
+		this.projekcijaId = projekcijaId;
 	}
-	public Sediste getSediste() {
+
+
+	public int getSediste() {
 		return sediste;
 	}
-	public void setSediste(Sediste sediste) {
+	public void setSediste(int sediste) {
 		this.sediste = sediste;
 	}
-	public String getDatumIvreme() {
+	public Date getDatumIvreme() {
 		return datumIvreme;
 	}
-	public void setDatumIvreme(String datumIvreme) {
+	public void setDatumIvreme(Date datumIvreme) {
 		this.datumIvreme = datumIvreme;
 	}
-	public Korisnik getKorisnik() {
+	public int getKorisnik() {
 		return korisnik;
 	}
-	public void setKorisnik(Korisnik korisnik) {
+	public void setKorisnik(int korisnik) {
 		this.korisnik = korisnik;
+	}
+
+
+	public boolean isObrisan() {
+		return obrisan;
+	}
+
+
+	public void setObrisan(boolean obrisan) {
+		this.obrisan = obrisan;
 	}
 	
 	
 	
 
+	
 }
