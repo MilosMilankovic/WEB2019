@@ -2,6 +2,9 @@
     <wb-module deploy-name="Cinema">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="sqlite-jdbc-3.27.2.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/koOoomp/Downloads/sqlite-jdbc-3.27.2.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="Cinema"/>
         <property name="java-output-path" value="/Cinema/build/classes"/>
     </wb-module>

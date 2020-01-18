@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -70,7 +72,12 @@ public class ProjekcijaDAO {
 					String film = rset.getString(index++);
 					Integer tipProjekcije = rset.getInt(index++);
 					Integer sala = rset.getInt(index++);
-					Date datumIvreme = rset.getDate(index++);
+					String time = rset.getString(index++);
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+					Date datumIvreme = sdf.parse(time);
+					
+					//Date datumIvreme = rset.getDate(index++);
 					Integer cenaKarte = rset.getInt(index++);
 					Integer administrator = rset.getInt(index++);
 					Boolean obrisan = rset.getBoolean(index++);
@@ -78,6 +85,10 @@ public class ProjekcijaDAO {
 					projekcije.add(new Projekcija(id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan));
 				}
 				return projekcije;
+		} catch (ParseException ex) {
+			System.out.println("Greska u parsiranju datuma!");
+			ex.printStackTrace();		
+		
 		} catch (SQLException ex) {
 				System.out.println("Greska u SQL upitu");
 				ex.printStackTrace();

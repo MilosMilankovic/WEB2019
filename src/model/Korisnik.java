@@ -5,18 +5,18 @@ import java.util.Date;
 
 public class Korisnik {
 
-	public enum Uloga {NEPRIJAVLJEN, KORISNIK, ADMIN}
+	
 	
 	private int id;
 	private String korisnickoIme;
 	private String lozinka;
 	private Date datumRegistracije;
-	private Uloga uloga;
+	private String uloga;
 	private boolean obrisan;
 	
 	
 	
-	public Korisnik(int id, String korisnickoIme, String lozinka, Date datumRegistracije, Uloga uloga, boolean obrisan) {
+	public Korisnik(int id, String korisnickoIme, String lozinka, Date datumRegistracije, String uloga, boolean obrisan) {
 		super();
 		this.id=id;
 		this.korisnickoIme = korisnickoIme;
@@ -76,13 +76,13 @@ public class Korisnik {
 
 
 
-	public Uloga getUloga() {
+	public String getUloga() {
 		return uloga;
 	}
 
 
 
-	public void setUloga(Uloga uloga) {
+	public void setUloga(String uloga) {
 		this.uloga = uloga;
 	}
 

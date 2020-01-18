@@ -44,10 +44,12 @@ public class LoginServlet extends HttpServlet {
 			Korisnik korisnik = KorisnikDAO.get(korisnickoIme);
 			if (korisnik == null) {
 				
-				throw new Exception("Pogresno ime ili lozinka");
+				throw new Exception("Nije pronadjen korisnik sa prosledjenim imenom");
 			}
+			
+			
 			if (!korisnik.getLozinka().equals(lozinka)) {
-				throw new Exception("Pogresno ime ili lozinka");
+				throw new Exception("Pogresna lozinka");
 			}
 			
 			HttpSession session = request.getSession();
