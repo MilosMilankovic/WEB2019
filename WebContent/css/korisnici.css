@@ -5,7 +5,6 @@ body {
 
 }
 
-
 .nav ul {
 	list-style: none;
 	background: #663366;
@@ -16,6 +15,7 @@ body {
 
 .nav li {
 	display: inline-block;
+	padding: 10px;
 }
 
 .nav a {
@@ -23,7 +23,7 @@ body {
 	color: #fff;
 	width: 100px;
 	display: block;
-	padding: 15px;
+	padding: 10px;
 	font-size: 17px;
 	font-family: Helvetica;
 
@@ -46,12 +46,8 @@ body {
   background-color: red;
 }
 
-.nav li a.login {
-  background-color: green;
-}
-
-.nav li a.register {
-	background-color: gray;
+.nav li a.home {
+	background-color: green;
 }
 
 .tabela {

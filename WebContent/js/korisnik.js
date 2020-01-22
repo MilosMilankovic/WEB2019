@@ -3,11 +3,11 @@ $(document).ready(function() {
 	ajaxGet();
 	function ajaxGet() {
 		$.ajax({
-			type : "GET",
+			type : "POST",
 			url : "http://localhost:8080/Cinema/KorisnikServlet",
 			success : function(result) {
 				if (result.status == "success") {
-					var list = result.dataList;
+					var userId = $(this).attr('id');
 					var content="";
 					content+='<table width="50%" border="1">';
 					
@@ -33,4 +33,23 @@ $(document).ready(function() {
 
 });
 
-
+$(document).on('click',".deleteButton", function(event){
+	var userId = $(this).attr('id');
+	
+	var json = {
+			'status': 'delete',
+			'id': userId
+	}
+	var x=confirm("Are you shure ?");
+	if(x){
+		$.post('UserServlet',json,function(data){
+			window.location.replace("users.html");
+		});
+	}else{
+		return;
+	}
+	
+	
+	event.preventDefault();
+	return false;
+});

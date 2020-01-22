@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="js/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="js/film.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="css/film.css">
+</head>
+<body>
+	Ucitan film
+	<div id ="film" class="film"></div>
+	
+	
+	<script type="text/javascript" language="JavaScript">
+		function readCookie(name){
+			var nameEQ = name + "=";
+			var ca = document.cookie.split(';');
+			for(var i=0; i<ca.length;i++){
+				var c = ca[i];
+				while (c.charAt(0)==' ') c = c.substring(1,c.length);
+				if(c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+			}
+			return null;
+		}
+		
+		function obrisiFilm(idFilm){
+			$.get('http://localhost:8080/Cinema/ObrisiFilmServlet', {"idFilm":idFilm},function(data) {
+				if(data.status == "obrisan"){
+					alert("proslo brisanje");
+					$(location).attr('href','http://localhost:8080/Cinema/index.html')
+				}else{
+					alert("Dogodila se neka greska");
+				}
+			})
+		}
+		
+		function izmeniFilm(item){
+			
+			document.cookie = "idFilm="+idFilm;
+			$(location).attr('href','http://localhost:8080/Cinema/izmeniFilm.html')
+		}
+	</script>
+</body>
+</html>

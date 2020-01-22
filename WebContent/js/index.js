@@ -1,5 +1,8 @@
 $(document).ready(function() {
 
+	
+	
+	
 	ajaxGet();
 	function ajaxGet() {
 		$.ajax({
@@ -17,13 +20,13 @@ $(document).ready(function() {
 						var item = list[i];
 						console.log(item.naziv);
 						content+='<tr>';
-						content+='<td>' + item.naziv + '</td>';
+						content+='<td> ' + item.id + ' ' + item.naziv + ' <button id="' + item.id + '" onClick="ucitajFilm('+item.id+')">Click Me!</button></td>';
 						content+='<td>' + item.zanrovi + '</td>';
 						content+='<td>' + item.trajanje + '</td>';
 						content+='<td>' + item.distributer + '</td>';
 						content+='<td>' + item.zemljaPorekla + '</td>';
 						content+='<td>' + item.godinaProizvodnje + '</td>';
-						content+='</tr>';
+						content+=' </tr>';
 					}
 					content+='</table>';
 					$("#filmovi").append(content);
@@ -32,6 +35,8 @@ $(document).ready(function() {
 			}
 		});
 	}
+	
+	
 
 });
 

@@ -11,11 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import dao.KorisnikDAO;
-import dao.ProjekcijaDAO;
+
+import enums.Uloga;
 import model.Korisnik;
-import model.Projekcija;
+
+
+
+
 
 /**
  * Servlet implementation class KorisnikServlet
@@ -59,8 +62,53 @@ public class KorisnikServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+		
+		String status = request.getParameter("status");
+		
+		if(status.equals("delete")) {
+			
+			int id = Integer.parseInt(request.getParameter("id"));
+			
+			Korisnik k = KorisnikDAO.getId(id);
+			k.setObrisan(true);
+			
+			KorisnikDAO.update(k);
+			
+			Map<String, Object> data = new HashMap<>();		
+			data.put("status", "success");
+			
+			ObjectMapper mapper = new ObjectMapper();
+			String jsonData = mapper.writeValueAsString(data);
+			System.out.println(jsonData);
 
+			response.setContentType("application/json");
+			response.getWriter().write(jsonData);
+		
+		} /*else if(status.equals("edit")) {
+			
+			String korisnickoIme = request.getParameter("username");
+			String lozinka = request.getParameter("password");
+			String role = request.getParameter("role");
+			int id = Integer.parseInt(request.getParameter("id"));
+			
+			Uloga novaUloga = Uloga.valueOf(role);
+			
+			Korisnik korisnik = KorisnikDAO.getOneId(id);
+			
+			korisnik.setUsername(username);
+			korisnik.setPassword(password);
+			korisnik.setUloga(uloga);
+			
+			KorisnikDAO.update(korisnik);
+			Map<String, Object> data = new HashMap<>();
+			
+			data.put("status", "success");
+			ObjectMapper mapper = new ObjectMapper();
+			String jsonData = mapper.writeValueAsString(data);
+			System.out.println(jsonData);
+
+			response.setContentType("application/json");
+			response.getWriter().write(jsonData);
+		}*/
+	}
 }

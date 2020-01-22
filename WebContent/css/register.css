@@ -1,0 +1,53 @@
+body {
+	background-color: #ccc;
+}
+*{
+	margin: 0;
+	padding: 0;
+}
+
+.log {
+	width: 380px;
+	height: 480px;
+	position: relative;
+	margin: 6% auto;
+	padding: 5px;
+	background-color: #ff947d;
+}
+
+.polja {
+	top: 180px;
+	position: absolute;
+	width: 280px;
+	margin-left: 40px;
+}
+
+.ime {
+	width: 100%;
+	padding: 10px 0;
+	margin: 5px 0;
+	border-left: 0;
+	border-top: 0;
+	border-right: 0;
+	border-bottom: 1px solid #999;
+	outline: none; 
+	margin-top: 40px;
+}
+
+.dugme {
+	width: 85%;
+	padding: 10px 30px;
+	margin-top: 60px;
+	margin-bottom: 50px;
+	margin-left: 20px;
+	display: block;
+	background-color: #ffe0b3;
+	border: 0;
+	outline: none;
+	border-radius: 30px;
+}
+
+h1{
+	margin-top: 50px;
+	margin-left: 115px;
+}

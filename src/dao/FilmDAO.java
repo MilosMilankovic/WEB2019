@@ -98,12 +98,12 @@ public class FilmDAO {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		try {
-				String query = "INSERT INTO film (id, naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan)"
-								+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				String query = "INSERT INTO film (naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis)"
+								+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				pstmt = conn.prepareStatement(query);
 				
 				int index = 1;
-				pstmt.setInt(index++, film.getId());
+				
 				pstmt.setString(index++, film.getNaziv());
 				pstmt.setString(index++, film.getReziser());
 				pstmt.setString(index++, film.getGlumci());
@@ -113,12 +113,12 @@ public class FilmDAO {
 				pstmt.setString(index++, film.getZemljaPorekla());
 				pstmt.setInt(index++, film.getGodinaProizvodnje());
 				pstmt.setString(index++, film.getOpis());
-				pstmt.setBoolean(index++, film.isObrisan());
+				//pstmt.setBoolean(index++, film.isObrisan());
 				
 				return pstmt.executeUpdate() == 1;
 	
 		} catch (SQLException ex) {
-				System.out.println("Greska u SQL upitu");
+				System.out.println("Greska u SQL upitu ovde?");
 				ex.printStackTrace();
 		} finally {
 				try {pstmt.close();} catch (SQLException ex1) {ex1.printStackTrace();}

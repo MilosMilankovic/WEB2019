@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,15 +15,15 @@ import dao.FilmDAO;
 import model.Film;
 
 /**
- * Servlet implementation class FilmoviServlet
+ * Servlet implementation class DodajFilmServlet
  */
-public class FilmoviServlet extends HttpServlet {
+public class DodajFilmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FilmoviServlet() {
+    public DodajFilmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,23 +32,8 @@ public class FilmoviServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Film> filmovi = new ArrayList<>();
-		try {
-			filmovi = FilmDAO.getAll();
-			System.out.println(filmovi);
-			Map<String, Object> data = new HashMap<>();
-			data.put("status", "success");
-			data.put("dataList", filmovi);
-
-			ObjectMapper mapper = new ObjectMapper();
-			String jsonData = mapper.writeValueAsString(data);
-			System.out.println(jsonData);
-
-			response.setContentType("application/json");
-			response.getWriter().write(jsonData);
-		}catch (Exception ex) {
-			System.out.println("greskaa");
-		}
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -58,14 +42,7 @@ public class FilmoviServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String status = "success";
-		
-		String idStr = request.getParameter("id");
-		
 		int id = 0;
-		
-		if(idStr!=null && idStr.length()>0) {
-			id = Integer.parseInt(idStr);
-		}
 		String naziv = request.getParameter("naziv");
 		String reziser = request.getParameter("reziser");
 		String glumci = request.getParameter("glumci");
@@ -74,20 +51,13 @@ public class FilmoviServlet extends HttpServlet {
 		int tr = Integer.parseInt(trajanje);
 		String distributer = request.getParameter("distributer");
 		String zemljaPorekla = request.getParameter("zemljaPorekla");
-		String godinaProizvodnje = request.getParameter("godinaProizvodnje");
+		String godinaProizvodnje = request.getParameter("godina");
 		int godina = Integer.parseInt(godinaProizvodnje);
 		String opis = request.getParameter("opis");
 	
 		
 		Film f = new Film(id, naziv, reziser, glumci, zanrovi, tr, distributer, zemljaPorekla, godina, opis, false);
-		if(id==0) {
-			System.out.println("Rec je o kreiranju novog filma");
-			FilmDAO.add(f);
-		}else if (id>0) {
-			System.out.println("Rec je o menjanju postojeceg filma");
-			FilmDAO.update(f);
-		}
-		
+		FilmDAO.add(f);
 		
 		
 		

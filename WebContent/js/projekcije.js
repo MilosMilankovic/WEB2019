@@ -11,7 +11,7 @@ $(document).ready(function() {
 					var content="";
 					content+='<table width="50%" border="1">';
 					
-					content+='<tr><td>film</td><td>datum i vreme</td><td>tip projekcije</td><td>sala</td><td>cena karte</td></tr>'
+					content+='<tr><td>film</td><td>datum i vreme</td><td>tip projekcije</td><td>sala</td><td>cena karte</td><td>Obrisi</td></tr>'
 						
 					for (var i = 0, size = list.length; i < size; i++) {
 						var item = list[i];
@@ -22,6 +22,7 @@ $(document).ready(function() {
 						content+='<td>' + item.tipProjekcije + '</td>';
 						content+='<td>' + item.sala + '</td>';
 						content+='<td>' + item.cenaKarte + '</td>';
+						content+='<td> ' + item.id + ' ' + item.film + ' <button id="' + item.id + '" onClick="obrisiProjekciju('+item.id+')">Obrisi projekciju</button></td>';
 						content+='</tr>';
 					}
 					content+='</table>';

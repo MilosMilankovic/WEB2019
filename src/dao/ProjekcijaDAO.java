@@ -30,7 +30,7 @@ public class ProjekcijaDAO {
 				if (rset.next()) {
 					
 					int index = 1; //iz baze
-					String film = rset.getString(index);
+					int film = rset.getInt(index);
 					Integer tipProjekcije = rset.getInt(index++);
 					Integer sala = rset.getInt(index++);
 					Date datumIvreme = rset.getDate(index++);
@@ -69,7 +69,7 @@ public class ProjekcijaDAO {
 				while (rset.next()) {
 					int index = 1;
 					Integer id = rset.getInt(index++);
-					String film = rset.getString(index++);
+					int film = rset.getInt(index++);
 					Integer tipProjekcije = rset.getInt(index++);
 					Integer sala = rset.getInt(index++);
 					String time = rset.getString(index++);
@@ -112,11 +112,14 @@ public class ProjekcijaDAO {
 				
 				int index = 1;
 				
-				pstmt.setString(index++, projekcija.getFilm());
+				pstmt.setInt(index++, projekcija.getFilm());
 				pstmt.setInt(index++, projekcija.getTipProjekcije());
 				pstmt.setInt(index++, projekcija.getSala());
-				java.sql.Date date = new java.sql.Date(new Date().getTime());
-				pstmt.setDate(index++, date);
+				//java.sql.Date date = new java.sql.Date(new Date().getTime());
+				SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String formattedTime = output.format(projekcija.getDatumIvreme());
+				
+				pstmt.setString(index++, formattedTime);
 				pstmt.setInt(index++, projekcija.getCenaKarte());
 				pstmt.setInt(index++, projekcija.getAdministrator());
 				pstmt.setBoolean(index++, projekcija.isObrisan());
@@ -141,7 +144,7 @@ public class ProjekcijaDAO {
 				pstmt = conn.prepareStatement(query);
 				
 				int index = 1;
-				pstmt.setString(index++, projekcija.getFilm());
+				pstmt.setInt(index++, projekcija.getFilm());
 				pstmt.setInt(index++, projekcija.getId());
 				pstmt.setInt(index++, projekcija.getSala());
 				pstmt.setInt(index++ , projekcija.getCenaKarte());

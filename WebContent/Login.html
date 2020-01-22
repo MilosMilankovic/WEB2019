@@ -9,17 +9,21 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 		
+		<link rel="stylesheet" type="text/css" href="css/login.css">
 		
 </head>
 <body>
-	<h3>Prijava:</h3>
-	<form id="loginForm">
-		<table>
-			<tr><td align="right">Korisničko ime:</td><td><input type="text" name="userName" id="userNameInput"/></td></tr>
-			<tr><td align="right">Lozinka:</td><td><input type="password" name="password" id="passwordInput"/></td></tr>
-			<tr><td/><td><input type="submit" value="Prijava" id="loginSubmit"></td></tr>
-		</table>
-	</form>
-	<p><a href="register.html">Registracija</a></p>
+	<div class="log">
+		<h1>PRIJAVA</h1>
+		<form id="loginForm">
+		<form class="polja">
+			<input type="text" class="ime" placeholder="Korisnicko Ime" name="userName" id="userNameInput">
+			<input type="password" class="ime" placeholder="Lozinka" name="password" id="passwordInput">
+			<button type="submit" class="dugme" id="loginSubmit" >Login</button>
+		</form>
+		<p><a href="register.html">Registracija</a></p>
+	</div>
 </body>
 </html>
+
+

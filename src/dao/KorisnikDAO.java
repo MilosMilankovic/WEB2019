@@ -191,4 +191,47 @@ public class KorisnikDAO {
 		return false;
 	}
 
+	
+	public static Korisnik getId(int id) {
+
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			String query = "SELECT * FROM korisnik WHERE id = ? AND obrisan = ?";
+
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, id);
+			pstmt.setBoolean(2, false);
+
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+
+				int index = 2;
+				
+				String korisnickoIme = rset.getString(index++);
+				String lozinka = rset.getString(index++);
+				String time = rset.getString(index++);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+				Date datumRegistracije = sdf.parse(time);
+				String uloga = Uloga.valueOf(rset.getString(index++).toUpperCase()).toString();
+				boolean obrisan = rset.getBoolean(index++);
+				System.out.println(id + " " + korisnickoIme + " " + lozinka + " " + datumRegistracije + " " + uloga
+						+ " " + obrisan);
+				return new Korisnik(id, korisnickoIme, lozinka, datumRegistracije, uloga, obrisan);
+			}
+		} catch (ParseException ex) {
+			System.out.println("Greska u parsiranju datuma!");
+			ex.printStackTrace();
+		} catch (SQLException ex) {
+			System.out.println("Greska u SQL upitu!");
+			ex.printStackTrace();
+		} finally {
+			try {pstmt.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+		}
+		return null;
+	}
 }

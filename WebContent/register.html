@@ -11,31 +11,21 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
 	crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="css/register.css">
 </head>
 <body>
-	<h3>
-		Registracija
-		</h1>
-		<div class="register">
-
-			<form id="RegisterForm">
-				<table>
-					<tr>
-						<td align="right">Korisničko ime:</td>
-						<td><input type="text" name="userName" id="userNameInput" />
-						</tdtr>
-					<tr>
-						<td align="right">Lozinka:</td>
-						<td><input type="password" name="password" id="passwordInput" /></td>
-					</tr>
-					<tr>
-						<td />
-						<td><input type="submit" value="Register" id="registerSubmit"></td>
-					</tr>
-				</table>
-
-			</form>
-		</div>
+	<div class="log">
+		<h1>Registracija</h1>
+		<form id="RegisterForm">
+		<form class="polja">
+			<input type="text" class="ime" placeholder="Korisnicko Ime" name="userName" id="userNameInput">
+			<input type="password" class="ime" placeholder="Lozinka" name="password" id="passwordInput">
+			<button type="submit" class="dugme" id="registerSubmit" >Register</button>
+		</form>
+	</div>
+	
 		<div id="postResultDiv" style="color: #cfcfcf"></div>
 </body>
 </html>
+
+

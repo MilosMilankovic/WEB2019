@@ -6,7 +6,7 @@ public class Projekcija {
 
 	
 	private int id;
-	private String film;
+	private int film;
 	private int tipProjekcije;
 	private int sala;
 	private Date datumIvreme;
@@ -18,7 +18,7 @@ public class Projekcija {
 	
 	
 	
-	public Projekcija(int id, String film, int tipProjekcije, int sala, Date datumIvreme, int cenaKarte,
+	public Projekcija(int id, int film, int tipProjekcije, int sala, Date datumIvreme, int cenaKarte,
 			int administrator, boolean obrisan) {
 		super();
 		this.id = id;
@@ -39,10 +39,10 @@ public class Projekcija {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getFilm() {
+	public int getFilm() {
 		return film;
 	}
-	public void setFilm(String film) {
+	public void setFilm(int film) {
 		this.film = film;
 	}
 	public int getTipProjekcije() {

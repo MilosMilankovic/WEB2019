@@ -6,6 +6,7 @@
 
 <script src="js/jquery-3.2.1.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/dodajfilm.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -20,7 +21,7 @@
 			<li style="float: left"><a href="index.html">Home</a></li>
 			<li><a href="#">Home</a></li>
 			<li><a href="projekcije.html">Projekcije</a></li>
-			<li><a href="#">Contact</a></li>
+			<li><a href="dodajfilm.html">Dodaj Film</a></li>
 			<li><a href="korisnici.html">Korisnici</a></li>
 			<input type="text" placeholder="Search..">
 			<li><a href="register.html" class="register">Register</a></li>
@@ -31,6 +32,19 @@
 	</div>
 	
 	
-	<div id="filmovi"></div>
+	<div id="filmovi" class="tabela">
+	</div>
+	
+	
+	<script type="text/javascript" language="JavaScript">
+		function ucitajFilm(idFilm){
+			document.cookie = "idFilm="+idFilm;
+			$(location).attr('href', 'http://localhost:8080/Cinema/film.html');
+		}
+	</script>
+	
+	<div id="dodajfilm"></div>
+
+	
 </body>
 </html>

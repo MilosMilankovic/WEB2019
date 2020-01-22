@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Dodaj film</title>
+
+<script src="js/jquery-3.2.1.js"></script>
+
+<script type="text/javascript" src="js/dodajfilm.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	
+	<div>
+
+	<h3>Dodaj film:</h3>
+	<form id="DodajFilm">
+		<table>
+			<tr><td align="right">Naziv:</td><td><input type="text" name="naziv" id="nazivInput"/></td></tr>
+			<tr><td align="right">Reziser:</td><td><input type="text" name="reziser" id="reziserInput"/></td></tr>
+			<tr><td align="right">Glumci:</td><td><input type="text" name="glumci" id="glumciInput"/></td></tr>
+			<tr><td align="right">Zanrovi:</td><td><input type="text" name="zanrovi" id="zanroviInput"/></td></tr>
+			<tr><td align="right">Trajanje:</td><td><input type="number" name="trajanje" id="trajanjeInput"/></td></tr>
+			<tr><td align="right">Distributer:</td><td><input type="text" name="distributer" id="distributerInput"/></td></tr>
+			<tr><td align="right">Zemlja Porekla:</td><td><input type="text" name="zemljaPorekla" id="zemljaPoreklaInput"/></td></tr>
+			<tr><td align="right">Godina Proizvodnje:</td><td><input type="number" name="godina" id="godinaInput"/></td></tr>
+			<tr><td align="right">Opis:</td><td><input type="opis" name="text" id="opisInput"/></td></tr>
+			<tr><td/><td><input type="submit" value="Dodaj" id="dodajfilmSubmit"></td></tr>
+		</table>
+	</form>
+	</div>
+	
+	<div id="postResultDiv" style="color: #cfcfcf"></div>
+
+</body>
+</html>
