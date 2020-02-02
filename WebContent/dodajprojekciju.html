@@ -22,7 +22,12 @@
 	<form id="DodajProjekciju">
 		<table>
 			<tr><td align="right">Film:</td><td><input type="text" name="film" id="filmInput"/></td></tr>
-			<tr><td align="right">Tip Projekcije:</td><td><input type="text" name="tipProjekcije" id="tipProjekcijeInput"/></td></tr>
+			<tr><td align="right">Tip Projekcije:</td><td>
+			<select id="tipProjekcijeInput" name="tipProjekcije">
+				 <option value="1">2D</option>
+				<option value="2">3D</option>
+				<option value="3">4D</option>
+			<select></td></tr>
 			<tr><td align="right">Sala:</td><td><input type="text" name="sala" id="salaInput"/></td></tr>
 			<tr><td align="right">Vreme prikazivanja:</td><td><input type="datetime-local" name="datumIvreme" id="datumIvremeInput"/></td></tr>
 			<tr><td align="right">Cena Karte:</td><td><input type="number" name="cenaKarte" id="cenaKarteInput"/></td></tr>
@@ -32,5 +37,6 @@
 		</table>
 	</form>
 	</div>
+
 </body>
 </html>

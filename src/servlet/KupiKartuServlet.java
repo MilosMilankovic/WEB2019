@@ -1,11 +1,11 @@
 package servlet;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,19 +14,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import dao.ProjekcijaDAO;
-import model.Projekcija;
+import dao.KartaDAO;
+import model.Karta;
 
 /**
- * Servlet implementation class DodajProjekcijuServlet
+ * Servlet implementation class KupiKartuServlet
  */
-public class DodajProjekcijuServlet extends HttpServlet {
+public class KupiKartuServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DodajProjekcijuServlet() {
+    public KupiKartuServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,39 +43,35 @@ public class DodajProjekcijuServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String sedistaInput = request.getParameter("sedistaInput");
+		String idProjekcija = request.getParameter("idProjekcija");
+		String idKorisnik = request.getParameter("idKorisnik");
 		
+		String[] sedista = sedistaInput.split(Pattern.quote(","));
 		String status = "success";
-		
-		String film = request.getParameter("film");
-		int filmint = Integer.parseInt(film);
-		String tipProjekcije = request.getParameter("tipProjekcije");
-		int tipProjekcijeint = Integer.parseInt(tipProjekcije);
-		String datumIvreme = request.getParameter("datumIvreme");
-		datumIvreme = datumIvreme+":00";
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		
-		Date datumIvremed = null;
-		try {
-			datumIvremed = sdf.parse(datumIvreme);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(sedista.length>1) {
+			for(int i=0; i<sedista.length-1; i++) {
+				for(int j=1; j<sedista.length; j++) {
+					int prvo = Integer.parseInt(sedista[i]);
+					int drugo = Integer.parseInt(sedista[j]);
+					if(Math.abs(drugo-prvo)>1) {
+						status = "failure";
+						break;
+					}
+				}
+			}
 		}
+		System.out.println("sedista " + Arrays.deepToString(sedista));
+		System.out.println("sedista input" + sedistaInput);
+		System.out.println("id projekcija " + idProjekcija);
 		
-		
-		
-		
-		
-		
-		String cena = request.getParameter("cenaKarte");
-		int cenaint = Integer.parseInt(tipProjekcije);
-		String sala = request.getParameter("sala");
-		int salaint = Integer.parseInt(sala);
-		
-		Projekcija p = new Projekcija(0, filmint, tipProjekcijeint, salaint, datumIvremed, cenaint, 4, false);
-		ProjekcijaDAO.add(p);
-		
-		
+		if(status.equals("success")) {
+			for(String s:sedista) {
+				Karta karta = new Karta(0, Integer.parseInt(idProjekcija), Integer.parseInt(s), new Date(), Integer.valueOf(idKorisnik), false);
+				KartaDAO.add(karta);
+			}
+		}
 		
 		Map<String, Object> data = new HashMap<>();
 		data.put("status", status);
@@ -86,7 +82,6 @@ public class DodajProjekcijuServlet extends HttpServlet {
 
 		response.setContentType("application/json");
 		response.getWriter().write(jsonData);
-		
 	}
 
 }

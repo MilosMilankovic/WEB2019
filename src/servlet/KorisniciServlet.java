@@ -12,27 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import dao.FilmDAO;
 import dao.KorisnikDAO;
-
-import enums.Uloga;
-import model.Film;
 import model.Korisnik;
 
-
-
-
-
 /**
- * Servlet implementation class KorisnikServlet
+ * Servlet implementation class KorisniciServlet
  */
-public class KorisnikServlet extends HttpServlet {
+public class KorisniciServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public KorisnikServlet() {
+    public KorisniciServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,15 +33,14 @@ public class KorisnikServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idKorisnik = request.getParameter("idKorisnik");
-		System.out.println("id korisnika u servletu " + idKorisnik);
-		
+		ArrayList<Korisnik> korisnici = new ArrayList<>();
 		try {
-			Korisnik korisnik = KorisnikDAO.getId(Integer.parseInt(idKorisnik));
-			System.out.println(korisnik);
+			korisnici = KorisnikDAO.getAll();
+			System.out.println(korisnici);
 			Map<String, Object> data = new HashMap<>();
 			data.put("status", "success");
-			data.put("data", korisnik);
+			data.put("dataList", korisnici);
+			
 
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonData = mapper.writeValueAsString(data);
@@ -57,8 +48,8 @@ public class KorisnikServlet extends HttpServlet {
 
 			response.setContentType("application/json");
 			response.getWriter().write(jsonData);
-		}catch (Exception ex) {
-			System.out.println("greskaa kod korisnika");
+		} catch (Exception ex) {
+			System.out.println("greskaa");
 		}
 	}
 
@@ -66,6 +57,8 @@ public class KorisnikServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

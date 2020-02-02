@@ -8,11 +8,92 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import model.Projekcija;
 import model.TipProjekcije;
 
 public class ProjekcijaDAO {
+	
+	public static List<Projekcija> projekcijeZaFilm(int idFilm){
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Projekcija> dostupneProjekcije = new ArrayList<>();
+		List<Projekcija> projekcijeUBuducnosti = new ArrayList<Projekcija>();
+		try {
+			String query = "SELECT id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan FROM projekcija WHERE film = ? and datumIvreme > DATETIME('now','localtime') and obrisan = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, idFilm);
+			pstmt.setBoolean(2, false);
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				int index = 1;
+				Integer id = rset.getInt(index++);
+				int film = rset.getInt(index++);
+				Integer tipProjekcije = rset.getInt(index++);
+				Integer sala = rset.getInt(index++);
+				String time = rset.getString(index++);
+				System.out.println("time->" + time);
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+				Date datumIvreme = sdf.parse(time);
+				System.out.println("date->" + datumIvreme);
+				//Date datumIvreme = rset.getDate(index++);
+				Integer cenaKarte = rset.getInt(index++);
+				Integer administrator = rset.getInt(index++);
+				Boolean obrisan = rset.getBoolean(index++);
+				
+				projekcijeUBuducnosti.add(new Projekcija(id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan));
+			}
+			//imamo sve projekcije u buducnosti koje se jos uvek nisu odrzale
+			System.out.println("projekcijeUBuducnosti" + projekcijeUBuducnosti);
+			//provera koliko ima mesta
+			for(Projekcija p:projekcijeUBuducnosti) {
+				pstmt = null;
+				rset = null;
+				String query2 = "SELECT count(s.redni_broj) FROM sediste as s where s.sala = ?";
+				pstmt = conn.prepareStatement(query2);
+				pstmt.setInt(1, p.getSala());
+				rset = pstmt.executeQuery();
+				Integer brojMesta = null;
+				while (rset.next()) {
+					int index = 1;
+					brojMesta = rset.getInt(index++);
+				}
+				pstmt = null;
+				rset = null;
+				String query3 = "SELECT count(k.id) FROM karta as k where k.projekcijaId = ?";
+				pstmt = conn.prepareStatement(query3);
+				pstmt.setInt(1, p.getId());
+				
+				rset = pstmt.executeQuery();
+				Integer brojProdatihKarata = null;
+				while (rset.next()) {
+					int index = 1;
+					brojProdatihKarata = rset.getInt(index++);
+				}
+				System.out.println("id projekcija " + p.getId());
+				System.out.println("broj prodatih karata "  + brojProdatihKarata);
+				System.out.println("broj mesta "  + brojMesta);
+				if(brojProdatihKarata<brojMesta) {
+					dostupneProjekcije.add(p);
+				}
+			}
+			
+			
+			return dostupneProjekcije;
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+				try {pstmt.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+				try {rset.close();} catch (SQLException ex1) {ex1.printStackTrace();}
+			
+		}
+		return null;
+	}
 
 	public static Projekcija get(int id) {
 		
@@ -73,10 +154,12 @@ public class ProjekcijaDAO {
 					Integer tipProjekcije = rset.getInt(index++);
 					Integer sala = rset.getInt(index++);
 					String time = rset.getString(index++);
+					System.out.println("time->" + time);
+					
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 					Date datumIvreme = sdf.parse(time);
-					
+					System.out.println("date->" + datumIvreme);
 					//Date datumIvreme = rset.getDate(index++);
 					Integer cenaKarte = rset.getInt(index++);
 					Integer administrator = rset.getInt(index++);

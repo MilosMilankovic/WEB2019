@@ -29,25 +29,14 @@
 			<tr><td align="right">Zemlja Porekla:</td><td><input type="text" name="zemljaPorekla" id="zemljaPoreklaInput"/></td></tr>
 			<tr><td align="right">Godina Proizvodnje:</td><td><input type="number" name="godina" id="godinaInput"/></td></tr>
 			<tr><td align="right">Opis:</td><td><input type="opis" name="text" id="opisInput"/></td></tr>
-			<tr><td/><td><input type="submit" value="Dodaj" id="dodajfilmSubmit"></td></tr>
+			<tr><td/><td><input type="submit" value="Izmeni" id="DodajFilm"></td></tr>
 		</table>
 	</form>
 	</div>
 	
 	<div id="postResultDiv" style="color: #cfcfcf"></div>
 	
-	<script type="text/javascript" language="JavaScript">
-		function readCookie(name){
-			var nameEQ = name + "=";
-			var ca = document.cookie.split(';');
-			for(var i=0; i<ca.length;i++){
-				var c = ca[i];
-				while (c.charAt(0)==' ') c = c.substring(1,c.length);
-				if(c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-			}
-			return null;
-		}
-	</script>
+	
 
 </body>
 </html>

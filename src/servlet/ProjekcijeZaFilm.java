@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -12,27 +13,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import dao.FilmDAO;
-import dao.KorisnikDAO;
-
-import enums.Uloga;
-import model.Film;
-import model.Korisnik;
-
-
-
-
+import dao.ProjekcijaDAO;
+import model.Projekcija;
 
 /**
- * Servlet implementation class KorisnikServlet
+ * Servlet implementation class ProjekcijeZaFilm
  */
-public class KorisnikServlet extends HttpServlet {
+public class ProjekcijeZaFilm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public KorisnikServlet() {
+    public ProjekcijeZaFilm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,24 +34,23 @@ public class KorisnikServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idKorisnik = request.getParameter("idKorisnik");
-		System.out.println("id korisnika u servletu " + idKorisnik);
-		
+		// TODO Auto-generated method stub
+		int idFilm = Integer.parseInt(request.getParameter("idFilm"));
+		List<Projekcija> projekcije = new ArrayList<>();
 		try {
-			Korisnik korisnik = KorisnikDAO.getId(Integer.parseInt(idKorisnik));
-			System.out.println(korisnik);
+			projekcije = ProjekcijaDAO.projekcijeZaFilm(idFilm);
+			System.out.println(projekcije);
 			Map<String, Object> data = new HashMap<>();
 			data.put("status", "success");
-			data.put("data", korisnik);
-
+			data.put("dataList", projekcije);
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonData = mapper.writeValueAsString(data);
 			System.out.println(jsonData);
 
 			response.setContentType("application/json");
 			response.getWriter().write(jsonData);
-		}catch (Exception ex) {
-			System.out.println("greskaa kod korisnika");
+		} catch (Exception ex) {
+			System.out.println("greskaa");
 		}
 	}
 
@@ -66,6 +58,8 @@ public class KorisnikServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

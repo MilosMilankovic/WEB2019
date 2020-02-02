@@ -1,10 +1,16 @@
+function ucitajKorisnika(idKorisnik){
+			document.cookie = "idKorisnik="+idKorisnik;
+			$(location).attr('href', 'http://localhost:8080/Cinema/korisnik.html');
+		}
+
+
 $(document).ready(function() {
 
 	ajaxGet();
 	function ajaxGet() {
 		$.ajax({
 			type : "GET",
-			url : "http://localhost:8080/Cinema/KorisnikServlet",
+			url : "http://localhost:8080/Cinema/KorisniciServlet",
 			success : function(result) {
 				if (result.status == "success") {
 					var list = result.dataList;
@@ -18,8 +24,8 @@ $(document).ready(function() {
 						var item = list[i];
 						console.log(item.korisnickoIme);
 						content+='<tr>';
-						content+='<td>' + item.korisnickoIme + '</td>';
-						content+='<td>' + item.datumRegistracije + '</td>';
+						content+='<td> ' + item.id + ' ' + item.korisnickoIme + ' <button id=" ' + item.id + '" onClick="ucitajKorisnika('+item.id+')">Click Me!</button></td>';
+						content+='<td>' + new Date(item.datumRegistracije).toLocaleString() + '</td>';
 						content+='<td>' + item.uloga + '</td>';
 						content+='</tr>';
 					}

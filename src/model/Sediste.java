@@ -3,13 +3,13 @@ package model;
 public class Sediste {
 
 	private int redniBroj;
-	private Sala sala;
+	private int sala;
 	
 	
 	
 	
 	
-	public Sediste(int redniBroj, Sala sala) {
+	public Sediste(int redniBroj, int sala) {
 		super();
 		this.redniBroj = redniBroj;
 		this.sala = sala;
@@ -22,10 +22,10 @@ public class Sediste {
 	public void setRedniBroj(int redniBroj) {
 		this.redniBroj = redniBroj;
 	}
-	public Sala getSala() {
+	public int getSala() {
 		return sala;
 	}
-	public void setSala(Sala sala) {
+	public void setSala(int sala) {
 		this.sala = sala;
 	}
 	
