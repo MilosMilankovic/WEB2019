@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Izmeni korisnika</title>
+
+<script src="js/jquery-3.2.1.js"></script>
+
+<script type="text/javascript" src="js/izmenikorisnika.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+		<div>
+
+	<h3>Izmeni film:</h3>
+	<form id="IzmeniKorisnika">
+		<table>
+			<tr><td align="right">Korisnicko ime:</td><td><input type="text" name="ime" id="imeInput"/></td></tr>
+			<tr><td align="right">Lozinka:</td><td><input type="text" name="lozinka" id="lozinkaInput"/></td></tr>
+			<!--  <tr><td align="right">Uloga:</td><td><input type="text" name="uloga" id="ulogaInput"/></td></tr>-->
+			<tr><td align="right">Uloge:</td><td>
+			<select id="ulogaInput" name="uloga">
+				<option value="KORISNIK">KORISNIK</option>
+				<option value="ADMIN">ADMIN</option>
+			<select></td></tr>
+			<tr><td/><td><input type="submit" value="Izmeni" id="IzmeniKorisnika"></td></tr>
+		</table>
+	</form>
+	</div>
+
+</body>
+</html>

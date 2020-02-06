@@ -14,7 +14,9 @@ $( document ).ready(function() {
         	var filmInput = $('#filmInput');
         	var tipProjekcijeInput = $('#tipProjekcijeInput');
         	var salaInput = $('#salaInput');
-        	var datumIvremeInput = $('#datumIvremeInput');
+        	
+        	var datum = $('#datum');
+        	var vreme = $('#vreme');
         	var cenaKarteInput = $('#cenaKarteInput');
         	var administratorInput = $('#administratorInput');
         	
@@ -29,7 +31,7 @@ $( document ).ready(function() {
     				'film' : filmInput.val(),
     				'tipProjekcije' : tipProjekcijeInput.val(),
     				'sala' : salaInput.val(),
-    				'datumIvreme' : datumIvremeInput.val(),
+    				'datumIvreme' : datum.val() + 'T' + vreme.val(),
     				'cenaKarte' : cenaKarteInput.val(),
     				
     				

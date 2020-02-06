@@ -42,7 +42,7 @@ $( document ).ready(function() {
                         
                         $(location).attr('href', 'http://localhost:8080/Cinema/index.html')
                     }else{
-                        $("#postResultDiv").html("<strong>Dogodila se greska prilikom registracije ili takav korisnik vec postoji!</strong>");
+                        $("#postResultDiv").html("<strong>Dogodila se greska prilikom kreiranja ili update!</strong>");
                     }
                 },
                 error : function(e) {

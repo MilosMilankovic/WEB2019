@@ -12,20 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dao.FilmDAO;
+import dao.KorisnikDAO;
 import enums.Uloga;
 import model.Film;
 import model.Korisnik;
 
 /**
- * Servlet implementation class ObrisiFilmServlet
+ * Servlet implementation class ObrisiKorisnikaServlet
  */
-public class ObrisiFilmServlet extends HttpServlet {
+public class ObrisiKorisnikaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ObrisiFilmServlet() {
+	public ObrisiKorisnikaServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -37,15 +38,15 @@ public class ObrisiFilmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String idFilm = request.getParameter("idFilm");
-		System.out.println("id filma u servletu " + idFilm);
-		Korisnik korisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
-		System.out.println("ULOGA KORISNIKA JEEE " + korisnik.getUloga());
-		if (korisnik.getUloga().equals(Uloga.ADMIN.toString())) {
-
+		String idKorisnik = request.getParameter("idKorisnik");
+		System.out.println("id korisnika u servletu " + idKorisnik);
+		Korisnik korisnikUlogovani = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
+		System.out.println("ULOGA KORISNIKA JEEE " + korisnikUlogovani.getUloga());
+		if (korisnikUlogovani.getUloga().equals(Uloga.ADMIN.toString())) {
 			try {
-				Film film = FilmDAO.get(Integer.parseInt(idFilm));
-				FilmDAO.delete(film);
+				Korisnik korisnik = KorisnikDAO
+						.getId(Integer.parseInt(idKorisnik));/* FilmDAO.get(Integer.parseInt(idFilm)); */
+				KorisnikDAO.delete(korisnik);
 				// System.out.println(film);
 				Map<String, Object> data = new HashMap<>();
 				data.put("status", "obrisan");

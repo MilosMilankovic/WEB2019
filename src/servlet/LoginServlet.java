@@ -38,10 +38,10 @@ public class LoginServlet extends HttpServlet {
 		String status = "success";
 		String korisnickoIme = request.getParameter("username");
 		String lozinka = request.getParameter("password");
-		
+		Korisnik korisnik = null;
 		try {
 			
-			Korisnik korisnik = KorisnikDAO.get(korisnickoIme);
+			korisnik = KorisnikDAO.get(korisnickoIme);
 			if (korisnik == null) {
 				
 				throw new Exception("Nije pronadjen korisnik sa prosledjenim imenom");
@@ -66,7 +66,10 @@ public class LoginServlet extends HttpServlet {
 	
 		Map<String, Object> data = new HashMap<>();
 		data.put("status", status);
-
+		if(korisnik!=null) {
+			System.out.println("ulogovaniKorisnik" + korisnik.getId());
+			data.put("ulogovaniKorisnik", korisnik.getId());
+		}
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonData = mapper.writeValueAsString(data);
 		System.out.println(jsonData);

@@ -51,7 +51,7 @@ $(document).ready(function() {
     	
     	var sedistaInput = $('#sedista').val();
     	var idProjekcija = readCookie("idProjekcija");
-    	var idKorisnik = readCookie("idKorisnik");
+    	var idKorisnik = readCookie("ulogovaniKorisnik");
     	console.log(sedistaInput + " <--- ");
         // DO POST
         $.ajax({

@@ -52,14 +52,14 @@ public class KupiKartuServlet extends HttpServlet {
 		String status = "success";
 		if(sedista.length>1) {
 			for(int i=0; i<sedista.length-1; i++) {
-				for(int j=1; j<sedista.length; j++) {
-					int prvo = Integer.parseInt(sedista[i]);
-					int drugo = Integer.parseInt(sedista[j]);
-					if(Math.abs(drugo-prvo)>1) {
-						status = "failure";
-						break;
-					}
+				
+				int prvo = Integer.parseInt(sedista[i]);
+				int drugo = Integer.parseInt(sedista[i+1]);
+				if(Math.abs(drugo-prvo)>1) {
+					status = "failure";
+					break;
 				}
+				
 			}
 		}
 		System.out.println("sedista " + Arrays.deepToString(sedista));

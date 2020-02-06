@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import dao.FilmDAO;
 import dao.KorisnikDAO;
 import model.Korisnik;
 
@@ -20,19 +21,21 @@ import model.Korisnik;
  */
 public class KorisniciServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public KorisniciServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public KorisniciServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		ArrayList<Korisnik> korisnici = new ArrayList<>();
 		try {
 			korisnici = KorisnikDAO.getAll();
@@ -40,7 +43,6 @@ public class KorisniciServlet extends HttpServlet {
 			Map<String, Object> data = new HashMap<>();
 			data.put("status", "success");
 			data.put("dataList", korisnici);
-			
 
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonData = mapper.writeValueAsString(data);
@@ -54,11 +56,41 @@ public class KorisniciServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String status = "success";
+
+		String idStr = request.getParameter("id");
+
+		int id = 0;
+
+		if (idStr != null && idStr.length() > 0) {
+			id = Integer.parseInt(idStr);
+		}
+		String ime = request.getParameter("ime");
+		String lozinka = request.getParameter("lozinka");
+		String uloga = request.getParameter("uloga");
+		
+		if(ime!=null && lozinka!=null && uloga!=null && !ime.isEmpty() && !lozinka.isEmpty() && !uloga.isEmpty()) {
+			Korisnik k = new Korisnik(id, ime, lozinka, null, uloga, false);
+			KorisnikDAO.update(k);
+		}else {
+			status = "failure";
+		}
+
+		Map<String, Object> data = new HashMap<>();
+		data.put("status", status);
+
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonData = mapper.writeValueAsString(data);
+		System.out.println(jsonData);
+
+		response.setContentType("application/json");
+		response.getWriter().write(jsonData);
 	}
 
 }

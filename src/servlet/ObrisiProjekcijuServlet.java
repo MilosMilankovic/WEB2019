@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 import dao.ProjekcijaDAO;
-
+import enums.Uloga;
+import model.Korisnik;
 import model.Projekcija;
 
 /**
@@ -39,22 +39,26 @@ public class ObrisiProjekcijuServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String idProjekcija = request.getParameter("idProjekcija");
 		System.out.println("id projekcije u servletu " + idProjekcija);
+		Korisnik korisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
+		System.out.println("ULOGA KORISNIKA JEEE " + korisnik.getUloga());
+		if (korisnik.getUloga().equals(Uloga.ADMIN.toString())) {
+			try {
+				Projekcija projekcija = ProjekcijaDAO.get(Integer.parseInt(idProjekcija));
+				ProjekcijaDAO.delete(projekcija);
 
-		try {
-			Projekcija projekcija = ProjekcijaDAO.get(Integer.parseInt(idProjekcija));
-			ProjekcijaDAO.delete(projekcija);
-			
-			Map<String, Object> data = new HashMap<>();
-			data.put("status", "obrisan");
-			
-			ObjectMapper mapper = new ObjectMapper();
-			String jsonData = mapper.writeValueAsString(data);
-			System.out.println(jsonData);
-			//
-			response.setContentType("application/json");
-			response.getWriter().write(jsonData);
-		} catch (Exception ex) {
-			System.out.println("greskaa");
+				Map<String, Object> data = new HashMap<>();
+				data.put("status", "obrisan");
+
+				ObjectMapper mapper = new ObjectMapper();
+				String jsonData = mapper.writeValueAsString(data);
+				System.out.println(jsonData);
+				//
+				response.setContentType("application/json");
+				response.getWriter().write(jsonData);
+			} catch (Exception ex) {
+				System.out.println("greskaa");
+				ex.printStackTrace();
+			}
 		}
 	}
 

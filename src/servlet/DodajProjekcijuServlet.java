@@ -68,7 +68,7 @@ public class DodajProjekcijuServlet extends HttpServlet {
 		
 		
 		String cena = request.getParameter("cenaKarte");
-		int cenaint = Integer.parseInt(tipProjekcije);
+		int cenaint = Integer.parseInt(cena);
 		String sala = request.getParameter("sala");
 		int salaint = Integer.parseInt(sala);
 		

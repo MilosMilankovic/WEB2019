@@ -1,0 +1,56 @@
+body {
+	padding-top: 50px;
+	margin: 0;
+	background-color: #ccc;
+
+}
+
+.nav ul {
+	list-style: none;
+	background: #663366;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}
+
+.nav li {
+	display: inline-block;
+	padding: 10px;
+}
+
+.nav a {
+	text-decoration: none;
+	color: #fff;
+	width: 100px;
+	display: block;
+	padding: 10px;
+	font-size: 17px;
+	font-family: Helvetica;
+
+}
+
+.nav a:hover {
+	background: #000;
+}
+
+.nav input[type=text] {
+  
+  padding: 3px;
+  border: none;
+  margin-top: 7px;
+  margin-right: 10px;
+  font-size: 17px;
+}
+
+.nav li a.logout {
+  background-color: red;
+}
+
+.nav li a.home {
+	background-color: green;
+}
+
+.tabela {
+	margin-left: 350px;
+	margin-top: 80px;
+}

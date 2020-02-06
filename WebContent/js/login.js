@@ -12,6 +12,7 @@ $(document).ready(function() {
 		$.post('LoginServlet', {'username': userName, 'password': password}, function(data) {
 			console.log(data);
 			if (data.status == 'success') {
+				document.cookie = "ulogovaniKorisnik="+data.ulogovaniKorisnik;
 				window.location.replace('index.html');
 			}
 			if (data.status == 'failure') {

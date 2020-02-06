@@ -147,7 +147,7 @@ public class KorisnikDAO {
 			int index = 1;
 			pstmt.setString(index++, korisnik.getKorisnickoIme());
 			pstmt.setString(index++, korisnik.getLozinka());
-			pstmt.setString(index++, korisnik.getUloga().toString());
+			pstmt.setString(index++, korisnik.getUloga());
 			pstmt.setBoolean(index++, korisnik.isObrisan());
 			pstmt.setInt(index++, korisnik.getId());
 
@@ -164,7 +164,7 @@ public class KorisnikDAO {
 		return false;
 	}
 
-	public static boolean delete(int id) {
+	public static boolean delete(Korisnik korisnik) {
 
 		Connection conn = ConnectionManager.getConnection();
 
@@ -175,7 +175,7 @@ public class KorisnikDAO {
 
 			int index = 1;
 			pstmt.setBoolean(index++, true);
-			pstmt.setInt(index++, id);
+			pstmt.setInt(index++, korisnik.getId());
 			System.out.println(pstmt);
 
 			return pstmt.executeUpdate() == 1;

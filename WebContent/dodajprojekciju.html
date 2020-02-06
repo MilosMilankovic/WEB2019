@@ -12,12 +12,18 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
 	crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="css/dodajprojekciju.css">
 </head>
 <body>
 
 
-	<div>
-
+	<div class="nav">
+		<ul>
+			<li style="float: left"><a href="index.html" class="home">Home</a></li>
+			<li><a href="projekicje.html">Projekcije</a></li>
+			<input type="text" placeholder="Search..">
+			<li style="float: right"><a href="login.html" class="logout">Logout</a></li>
+		</ul>
 	<h3>Dodaj projekciju:</h3>
 	<form id="DodajProjekciju">
 		<table>
@@ -28,8 +34,15 @@
 				<option value="2">3D</option>
 				<option value="3">4D</option>
 			<select></td></tr>
-			<tr><td align="right">Sala:</td><td><input type="text" name="sala" id="salaInput"/></td></tr>
-			<tr><td align="right">Vreme prikazivanja:</td><td><input type="datetime-local" name="datumIvreme" id="datumIvremeInput"/></td></tr>
+			<tr><td align="right">Sala:</td><td>
+			<select id="salaInput" name="sala">
+				 <option value="1">Sala 1</option>
+				<option value="2">Sala 2</option>
+				<option value="3">sala 3</option>
+			<select></td></tr>
+			<!-- <tr><td align="right">Sala:</td><td><input type="text" name="sala" id="salaInput"/></td></tr> -->
+			<tr><td align="right">Datum prikazivanja:</td><td><input type="date" name="datum" id="datum"/></td></tr>
+			<tr><td align="right">Vreme prikazivanja:</td><td><input type="time" name="vreme" id="vreme"/></td></tr>
 			<tr><td align="right">Cena Karte:</td><td><input type="number" name="cenaKarte" id="cenaKarteInput"/></td></tr>
 			
 			

@@ -199,4 +199,14 @@
     <servlet-name>KupiKartuServlet</servlet-name>
     <url-pattern>/KupiKartuServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ObrisiKorisnikaServlet</display-name>
+    <servlet-name>ObrisiKorisnikaServlet</servlet-name>
+    <servlet-class>servlet.ObrisiKorisnikaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ObrisiKorisnikaServlet</servlet-name>
+    <url-pattern>/ObrisiKorisnikaServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

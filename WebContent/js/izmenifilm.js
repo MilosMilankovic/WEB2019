@@ -1,50 +1,3 @@
-/*
-$(document).ready(function() {
-	
-
-  	var nazivInput = $('#nazivInput');
-	var reziserInput = $('#reziserInput');
-	var glumciInput = $('#glumciInput');
-	var trajanjeInput = $('#trajanjeInput');
-	var zanroviInput = $('#trajanjeInput');
-	var distributerInput = $('#distributerInput');
-	var zemljaporeklaInput = $('#zemljaporeklaInput');
-	var godinaproizvodnjeInput = $('#godinaproizvodnjeInput');
-	var opisInput = $('#opisInput');
-	
-	
-	
-	$('#dodajfilmSubmit').on('click', function(event) { 
-		var naziv = nazivInput.val();
-		var reziser = reziserInput.val();
-		var glumci = glumciInput.val();
-		var zanrovi = zanroviInput.val();
-		var trajanje = trajanjeInput.val();
-		var distributer = distributerInput.val();
-		var zemljaporekla = zemljaporeklaInput.val();
-		var godinaproizvodnje = godinaproizvodnjeInput.val();
-		var opis = opisInput.val();
-		alert(naziv);
-		
-		$.post('DodajFilmServlet', {'naziv': naziv, 'reziser': reziser, 'glumci': glumci, 'zanrovi': zanrovi, 'trajanje': trajanje, 'distributer': distributer, 'zemljaporekla': zemljaporekla, 'godinaproizvodnje': godinaproizvodnje, 'opis': opis,}, function(data) {
-			console.log(data);
-			if (data.status == 'success') {
-				window.location.replace('index.html');
-			}
-			if (data.status == 'failure') {
-				alert("Selected incorrect data!");
-			}
-		});
-		
-
-		event.preventDefault();
-		return false;
-	});
-});
-
-
-*/
-
 function readCookie(name){
 		var nameEQ = name + "=";
 		var ca = document.cookie.split(';');
@@ -131,7 +84,7 @@ $( document ).ready(function() {
                     
                     $(location).attr('href', 'http://localhost:8080/Cinema/index.html')
                 }else{
-                    $("#postResultDiv").html("<strong>Dogodila se greska prilikom registracije ili takav korisnik vec postoji!</strong>");
+                    $("#postResultDiv").html("<strong>Dogodila se greska prilikom izmene!</strong>");
                 }
             },
             error : function(e) {
