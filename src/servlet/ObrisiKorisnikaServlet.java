@@ -42,16 +42,14 @@ public class ObrisiKorisnikaServlet extends HttpServlet {
 		System.out.println("id korisnika u servletu " + idKorisnik);
 		Korisnik korisnikUlogovani = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
 		System.out.println("ULOGA KORISNIKA JEEE " + korisnikUlogovani.getUloga());
-		if (korisnikUlogovani.getUloga().equals(Uloga.ADMIN.toString())) {
+		if (korisnikUlogovani.getUloga().equals(Uloga.ADMIN.toString()) && (Integer.parseInt(idKorisnik)!=korisnikUlogovani.getId())) {
 			try {
 				Korisnik korisnik = KorisnikDAO
 						.getId(Integer.parseInt(idKorisnik));/* FilmDAO.get(Integer.parseInt(idFilm)); */
 				KorisnikDAO.delete(korisnik);
-				// System.out.println(film);
 				Map<String, Object> data = new HashMap<>();
 				data.put("status", "obrisan");
-				// data.put("data", film);
-				//
+			
 				ObjectMapper mapper = new ObjectMapper();
 				String jsonData = mapper.writeValueAsString(data);
 				System.out.println(jsonData);

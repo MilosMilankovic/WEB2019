@@ -69,6 +69,7 @@ public class LoginServlet extends HttpServlet {
 		if(korisnik!=null) {
 			System.out.println("ulogovaniKorisnik" + korisnik.getId());
 			data.put("ulogovaniKorisnik", korisnik.getId());
+			data.put("uloga", korisnik.getUloga());
 		}
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonData = mapper.writeValueAsString(data);

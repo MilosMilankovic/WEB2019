@@ -13,26 +13,30 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dao.FilmDAO;
+import enums.Uloga;
 import model.Film;
+import model.Korisnik;
 
 /**
  * Servlet implementation class FilmoviServlet
  */
 public class FilmoviServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public FilmoviServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public FilmoviServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		ArrayList<Film> filmovi = new ArrayList<>();
 		try {
 			filmovi = FilmDAO.getAll();
@@ -47,23 +51,25 @@ public class FilmoviServlet extends HttpServlet {
 
 			response.setContentType("application/json");
 			response.getWriter().write(jsonData);
-		}catch (Exception ex) {
+		} catch (Exception ex) {
 			System.out.println("greskaa");
 		}
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String status = "success";
-		
+
 		String idStr = request.getParameter("id");
-		
+
 		int id = 0;
-		
-		if(idStr!=null && idStr.length()>0) {
+
+		if (idStr != null && idStr.length() > 0) {
 			id = Integer.parseInt(idStr);
 		}
 		String naziv = request.getParameter("naziv");
@@ -77,22 +83,23 @@ public class FilmoviServlet extends HttpServlet {
 		String godinaProizvodnje = request.getParameter("godinaProizvodnje");
 		int godina = Integer.parseInt(godinaProizvodnje);
 		String opis = request.getParameter("opis");
-	
-		
-		Film f = new Film(id, naziv, reziser, glumci, zanrovi, tr, distributer, zemljaPorekla, godina, opis, false);
-		if(id==0) {
-			System.out.println("Rec je o kreiranju novog filma");
-			FilmDAO.add(f);
-		}else if (id>0) {
-			System.out.println("Rec je o menjanju postojeceg filma");
-			FilmDAO.update(f);
+
+		Korisnik korisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
+		System.out.println("ULOGA KORISNIKA JEEE " + korisnik.getUloga());
+		if (korisnik.getUloga().equals(Uloga.ADMIN.toString())) {
+			Film f = new Film(id, naziv, reziser, glumci, zanrovi, tr, distributer, zemljaPorekla, godina, opis, false);
+			if (id == 0) {
+				System.out.println("Rec je o kreiranju novog filma");
+				FilmDAO.add(f);
+			} else if (id > 0) {
+				System.out.println("Rec je o menjanju postojeceg filma");
+				FilmDAO.update(f);
+			}
+
+		} else {
+			status = "failure";
 		}
-		
-		
-		
-		
-		
-	
+
 		Map<String, Object> data = new HashMap<>();
 		data.put("status", status);
 

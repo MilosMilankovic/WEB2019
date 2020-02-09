@@ -42,7 +42,7 @@ $( document ).ready(function() {
                         
                         $(location).attr('href', 'http://localhost:8080/Cinema/index.html')
                     }else{
-                        $("#postResultDiv").html("<strong>Dogodila se greska prilikom kreiranja ili update!</strong>");
+                        alert("Dogodila se greska prilikom kreiranja ili update!");
                     }
                 },
                 error : function(e) {

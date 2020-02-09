@@ -42,7 +42,7 @@ $( document ).ready(function() {
                         
                         $(location).attr('href', 'http://localhost:8080/Cinema/projekcije.html')
                     }else{
-                        $("#postResultDiv").html("<strong>Dogodila se greska prilikom registracije ili takav korisnik vec postoji!</strong>");
+                    	 alert("Dogodila se greska prilikom kreiranja!");
                     }
                 },
                 error : function(e) {

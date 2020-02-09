@@ -13,6 +13,7 @@ $(document).ready(function() {
 			console.log(data);
 			if (data.status == 'success') {
 				document.cookie = "ulogovaniKorisnik="+data.ulogovaniKorisnik;
+				document.cookie = "uloga="+data.uloga;
 				window.location.replace('index.html');
 			}
 			if (data.status == 'failure') {

@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dao.FilmDAO;
 import dao.KorisnikDAO;
+import enums.Uloga;
 import model.Korisnik;
 
 /**
@@ -38,7 +39,16 @@ public class KorisniciServlet extends HttpServlet {
 			throws ServletException, IOException {
 		ArrayList<Korisnik> korisnici = new ArrayList<>();
 		try {
-			korisnici = KorisnikDAO.getAll();
+			String uloga = request.getParameter("uloga");
+			System.out.println("ULOGA JE ===> " + uloga);
+			if(uloga.equals("ADMIN")) {
+				korisnici = KorisnikDAO.getAll();
+			}else if(uloga.equals("KORISNIK")){
+				Korisnik korisnikUlogovani = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
+				korisnici.add(korisnikUlogovani);
+				
+			}
+			
 			System.out.println(korisnici);
 			Map<String, Object> data = new HashMap<>();
 			data.put("status", "success");
@@ -74,14 +84,19 @@ public class KorisniciServlet extends HttpServlet {
 		String ime = request.getParameter("ime");
 		String lozinka = request.getParameter("lozinka");
 		String uloga = request.getParameter("uloga");
-		
-		if(ime!=null && lozinka!=null && uloga!=null && !ime.isEmpty() && !lozinka.isEmpty() && !uloga.isEmpty()) {
-			Korisnik k = new Korisnik(id, ime, lozinka, null, uloga, false);
-			KorisnikDAO.update(k);
-		}else {
+		Korisnik korisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
+		System.out.println("ULOGA KORISNIKA JEEE " + korisnik.getUloga());
+		if (korisnik.getUloga().equals(Uloga.ADMIN.toString())) {
+			if (ime != null && lozinka != null && uloga != null && !ime.isEmpty() && !lozinka.isEmpty()
+					&& !uloga.isEmpty()) {
+				Korisnik k = new Korisnik(id, ime, lozinka, null, uloga, false);
+				KorisnikDAO.update(k);
+			} else {
+				status = "failure";
+			}
+		} else {
 			status = "failure";
 		}
-
 		Map<String, Object> data = new HashMap<>();
 		data.put("status", status);
 

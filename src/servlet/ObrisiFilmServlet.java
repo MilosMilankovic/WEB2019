@@ -46,11 +46,10 @@ public class ObrisiFilmServlet extends HttpServlet {
 			try {
 				Film film = FilmDAO.get(Integer.parseInt(idFilm));
 				FilmDAO.delete(film);
-				// System.out.println(film);
+				
 				Map<String, Object> data = new HashMap<>();
 				data.put("status", "obrisan");
-				// data.put("data", film);
-				//
+				
 				ObjectMapper mapper = new ObjectMapper();
 				String jsonData = mapper.writeValueAsString(data);
 				System.out.println(jsonData);

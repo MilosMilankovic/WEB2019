@@ -42,9 +42,11 @@ body {
   font-size: 17px;
 }
 
-.nav li a.logout {
+.logout {
   background-color: red;
+  padding: 15px 32px;
 }
+
 
 .nav li a.login {
   background-color: green;

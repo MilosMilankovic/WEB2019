@@ -21,6 +21,7 @@ $(document).ready(function() {
 	ajaxGet();
 	function ajaxGet() {
 		var idFilm = readCookie("idFilm");
+		var uloga = readCookie("uloga");
 		alert("idFilm" + idFilm);
 		$.ajax({
 			type : "GET",
@@ -31,8 +32,13 @@ $(document).ready(function() {
 					var content="";
 					content+='<table width="50%" border="1">';
 					
-					content+='<tr><td>film</td><td>datum i vreme</td><td>tip projekcije</td><td>sala</td><td>cena karte</td><td>Kupi kartu</td></tr>'
-						
+					content+='<tr><td>film</td><td>datum i vreme</td><td>tip projekcije</td><td>sala</td><td>cena karte</td>'
+					
+					if (uloga==="KORISNIK") {
+						content+='<td>Kupi kartu</td>'
+					}
+					content+='</tr>';
+					
 					for (var i = 0, size = list.length; i < size; i++) {
 						var item = list[i];
 						console.log(item.film);
@@ -45,7 +51,9 @@ $(document).ready(function() {
 						content+='<td>' + item.tipProjekcije + '</td>';
 						content+='<td>' + item.sala + '</td>';
 						content+='<td>' + item.cenaKarte + '</td>';
-						content+='<td> <button id="' + item.id + '" onClick="kupiKartu('+item.id+')">Kupi kartu</button></td>';
+						if (uloga==="KORISNIK"){
+							content+='<td> <button id="' + item.id + '" onClick="kupiKartu('+item.id+')">Kupi kartu</button></td>';
+						}
 						content+='</tr>';
 					}
 					content+='</table>';
