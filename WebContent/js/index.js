@@ -6,7 +6,7 @@ function ucitajFilm(idFilm){
 function logout(){
 	alert("logout")
 	document.cookie = "ulogovaniKorisnik=0";
-	document.cookie = "uloga="+"";
+	document.cookie = "uloga="+""; 
 	$.get('http://localhost:8080/Cinema/LogOutServlet', {},function(data) {
 		if(data.status == "success"){
 				$(location).attr('href', 'http://localhost:8080/Cinema/login.html');

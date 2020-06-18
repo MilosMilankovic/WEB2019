@@ -1,50 +1,42 @@
-$( document ).ready(function() {
-       
-        $("#RegisterForm").submit(function(event) {
-            
-            event.preventDefault();
-            ajaxPost();
-        });
 
 
-        function ajaxPost(){
-
-        	var userNameInput = $('#userNameInput');
-        	var passwordInput = $('#passwordInput');
-
-            // DO POST
-            $.ajax({
-                type : "POST",
-               
-                url : "http://localhost:8080/Cinema/RegisterServlet",
-                data : {
-    				'username' : userNameInput.val(),
-    				'password' : passwordInput.val()
-    			},
-               
-                success : function(result) {
-                    if(result.status == "success"){
-                        
-                        $(location).attr('href', 'http://localhost:8080/Cinema/index.html')
-                    }else{
-                        $("#postResultDiv").html("<strong>Dogodila se greska prilikom registracije ili takav korisnik vec postoji!</strong>");
-                    }
-                },
-                error : function(e) {
-                    alert("Error!");
-                    console.log("ERROR: ", e);
-                }
-            });
-
-            // Reset FormData after Posting
-            resetData();
-
-        }
-
-        function resetData(){
-            $("#username").val("");
-            $("#userPassword").val("");
-        }
-    })
+$(document).ready(function() {
+	var userNameInput = $('#userNameInput');
+	var passwordInput = $('#passwordInput');
+	
+	
 
 
+	var messageParagraph = $('#messageParagraph');
+
+	$('#registerSubmit').on('click', function(event) {
+		var userName = userNameInput.val();
+		var password = passwordInput.val();
+		
+	
+		
+		console.log('userName: ' + userName);
+		console.log('password: ' + password);
+		
+		
+		var params = {
+			'userName': userName, 
+			'password': password
+		}
+		alert(userName)
+		$.post('RegisterServlet', params, function(data) {
+			console.log(data);
+
+			if (data.status == 'failure') {
+				messageParagraph.text(data.message);
+				return;
+			}
+			if (data.status == 'success') {
+				window.location.replace('index.html');
+			}
+		});
+
+		event.preventDefault();
+		return false;
+	});
+});

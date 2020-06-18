@@ -86,7 +86,7 @@ public class KorisniciServlet extends HttpServlet {
 		String uloga = request.getParameter("uloga");
 		Korisnik korisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
 		System.out.println("ULOGA KORISNIKA JEEE " + korisnik.getUloga());
-		if (korisnik.getUloga().equals(Uloga.ADMIN.toString())) {
+		if (korisnik.getUloga().equals(Uloga.ADMIN.toString()) || (id>0 && id==korisnik.getId())) {
 			if (ime != null && lozinka != null && uloga != null && !ime.isEmpty() && !lozinka.isEmpty()
 					&& !uloga.isEmpty()) {
 				Korisnik k = new Korisnik(id, ime, lozinka, null, uloga, false);

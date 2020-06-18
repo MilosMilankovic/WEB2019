@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -36,27 +37,41 @@ public class LoginServlet extends HttpServlet {
 		
 		
 		String status = "success";
-		String korisnickoIme = request.getParameter("username");
-		String lozinka = request.getParameter("password");
-		Korisnik korisnik = null;
+		String userName = request.getParameter("userName");
+		String password = request.getParameter("password");
+		
+		System.out.println("Ime " + userName + "sifra " + password);
+		//Korisnik korisnik = null;
 		try {
 			
-			korisnik = KorisnikDAO.get(korisnickoIme);
+			Korisnik korisnik = KorisnikDAO.getOne(userName, password);
 			if (korisnik == null) {
-				
 				throw new Exception("Nije pronadjen korisnik sa prosledjenim imenom");
 			}
 			
-			
-			if (!korisnik.getLozinka().equals(lozinka)) {
+			/*
+			if (!korisnik.getLozinka().equals(password)) {
 				throw new Exception("Pogresna lozinka");
 			}
-			
+			*/
+			else { 
 			HttpSession session = request.getSession();
-			session.setAttribute("ulogovanKorisnik", korisnik);
-			
-		
-			
+			session.setAttribute("ulogovanKorisnik", korisnik.getKorisnickoIme());
+			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
+			}
+		/*
+		}catch (Exception ex) {
+			String message = ex.getMessage();
+			if (message == null) {
+				message = "Nepredvidjena greska!";
+				ex.printStackTrace();
+			}
+			Map<String, Object> data = new LinkedHashMap<>();
+			data.put("message", message);
+
+			request.setAttribute("data", data);
+			request.getRequestDispatcher("./FailureServlet").forward(request, response);
+		}	*/
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -66,11 +81,12 @@ public class LoginServlet extends HttpServlet {
 	
 		Map<String, Object> data = new HashMap<>();
 		data.put("status", status);
-		if(korisnik!=null) {
+		/*if(korisnik!=null) {
 			System.out.println("ulogovaniKorisnik" + korisnik.getId());
 			data.put("ulogovaniKorisnik", korisnik.getId());
 			data.put("uloga", korisnik.getUloga());
-		}
+		} */
+		
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonData = mapper.writeValueAsString(data);
 		System.out.println(jsonData);
@@ -79,5 +95,5 @@ public class LoginServlet extends HttpServlet {
 		response.getWriter().write(jsonData);
 		
 	}
-
+  
 }
