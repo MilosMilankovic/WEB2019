@@ -32,6 +32,8 @@ public class ProjekcijaServlet extends HttpServlet {
 			Map<String, Object> data = new HashMap<>();
 			data.put("status", "success");
 			data.put("dataList", projekcije);
+			data.put("uloga", request.getSession().getAttribute("uloga"));
+			data.put("ulogovaniKorisnik", request.getSession().getAttribute("ulogovaniKorisnik"));
 			
 
 			ObjectMapper mapper = new ObjectMapper();

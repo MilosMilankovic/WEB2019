@@ -39,7 +39,7 @@ public class KorisniciServlet extends HttpServlet {
 			throws ServletException, IOException {
 		ArrayList<Korisnik> korisnici = new ArrayList<>();
 		try {
-			String uloga = request.getParameter("uloga");
+			String uloga = request.getSession().getAttribute("uloga").toString();
 			System.out.println("ULOGA JE ===> " + uloga);
 			if(uloga.equals("ADMIN")) {
 				korisnici = KorisnikDAO.getAll();
@@ -53,6 +53,8 @@ public class KorisniciServlet extends HttpServlet {
 			Map<String, Object> data = new HashMap<>();
 			data.put("status", "success");
 			data.put("dataList", korisnici);
+			data.put("uloga", request.getSession().getAttribute("uloga"));
+			data.put("ulogovaniKorisnik", request.getSession().getAttribute("ulogovaniKorisnik"));
 
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonData = mapper.writeValueAsString(data);
@@ -99,6 +101,8 @@ public class KorisniciServlet extends HttpServlet {
 		}
 		Map<String, Object> data = new HashMap<>();
 		data.put("status", status);
+		data.put("uloga", request.getSession().getAttribute("uloga"));
+		data.put("ulogovaniKorisnik", request.getSession().getAttribute("ulogovaniKorisnik"));
 
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonData = mapper.writeValueAsString(data);

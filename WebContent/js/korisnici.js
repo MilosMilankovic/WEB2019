@@ -1,31 +1,18 @@
 function ucitajKorisnika(idKorisnik){
-			document.cookie = "idKorisnik="+idKorisnik;
-			$(location).attr('href', 'http://localhost:8080/Cinema/korisnik.html');
+			
+			$(location).attr('href', 'http://localhost:8080/Cinema/korisnik.html?id='+idKorisnik);
 		}
 
 
 $(document).ready(function() {
-
-	function readCookie(name){
-		var nameEQ = name + "=";
-		var ca = document.cookie.split(';');
-		for(var i=0; i<ca.length;i++){
-			var c = ca[i];
-			while (c.charAt(0)==' ') c = c.substring(1,c.length);
-			if(c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-		}
-		return null;
-	}
-	
-	
 	
 	ajaxGet();
 	function ajaxGet() {
-		var uloga = readCookie("uloga");
+		
 	
 		$.ajax({
 			type : "GET",
-			url : "http://localhost:8080/Cinema/KorisniciServlet?uloga=" + uloga,
+			url : "http://localhost:8080/Cinema/KorisniciServlet",
 			success : function(result) {
 				if (result.status == "success") {
 					var list = result.dataList;

@@ -229,4 +229,14 @@
     <servlet-name>SuccessServlet</servlet-name>
     <url-pattern>/SuccessServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AuthServlet</display-name>
+    <servlet-name>AuthServlet</servlet-name>
+    <servlet-class>servlet.AuthServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AuthServlet</servlet-name>
+    <url-pattern>/AuthServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

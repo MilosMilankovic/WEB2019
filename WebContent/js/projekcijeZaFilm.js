@@ -1,27 +1,16 @@
 function kupiKartu(idProjekcija){
 	
-	document.cookie = "idProjekcija="+idProjekcija;
-	$(location).attr('href','http://localhost:8080/Cinema/kupiKartu.html')
+	
+	$(location).attr('href','http://localhost:8080/Cinema/kupiKartu.html?id='+idProjekcija)
 };
 
 $(document).ready(function() {
-
-	function readCookie(name){
-		var nameEQ = name + "=";
-		var ca = document.cookie.split(';');
-		for(var i=0; i<ca.length;i++){
-			var c = ca[i];
-			while (c.charAt(0)==' ') c = c.substring(1,c.length);
-			if(c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-		}
-		return null;
-	}
 	
 	
 	ajaxGet();
 	function ajaxGet() {
-		var idFilm = readCookie("idFilm");
-		var uloga = readCookie("uloga");
+		var idFilm = window.location.search.slice(1).split('?')[0].split('=')[1];
+		
 		alert("idFilm" + idFilm);
 		$.ajax({
 			type : "GET",
@@ -29,6 +18,7 @@ $(document).ready(function() {
 			success : function(result) {
 				if (result.status == "success") {
 					var list = result.dataList;
+					var uloga = result.uloga;
 					var content="";
 					content+='<table width="50%" border="1">';
 					

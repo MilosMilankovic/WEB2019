@@ -5,7 +5,7 @@ $(document).ready(function() { // izvršava se nakon što se izgradi DOM stablo 
 	var userNameInput = $('#userNameInput');
 	var passwordInput = $('#passwordInput');
 
-	var messageParagraph = $('#messageParagraph');
+	
 	
 	$('#loginSubmit').on('click', function(event) { // izvršava se na klik na dugme
 		var userName = userNameInput.val();

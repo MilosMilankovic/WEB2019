@@ -49,6 +49,8 @@ public class ObrisiKorisnikaServlet extends HttpServlet {
 				KorisnikDAO.delete(korisnik);
 				Map<String, Object> data = new HashMap<>();
 				data.put("status", "obrisan");
+				data.put("uloga", request.getSession().getAttribute("uloga"));
+				data.put("ulogovaniKorisnik", request.getSession().getAttribute("ulogovaniKorisnik"));
 			
 				ObjectMapper mapper = new ObjectMapper();
 				String jsonData = mapper.writeValueAsString(data);

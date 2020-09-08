@@ -1,7 +1,7 @@
 function kupiKartu(idProjekcija){
 	
-	document.cookie = "idProjekcija="+idProjekcija;
-	$(location).attr('href','http://localhost:8080/Cinema/kupiKartu.html')
+	
+	$(location).attr('href','http://localhost:8080/Cinema/kupiKartu.html?id='+idProjekcija)
 };
 
 function obrisiProjekciju(idProjekcija){
@@ -17,19 +17,10 @@ function obrisiProjekciju(idProjekcija){
 
 $(document).ready(function() {
 
-	function readCookie(name){
-		var nameEQ = name + "=";
-		var ca = document.cookie.split(';');
-		for(var i=0; i<ca.length;i++){
-			var c = ca[i];
-			while (c.charAt(0)==' ') c = c.substring(1,c.length);
-			if(c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-		}
-		return null;
-	}
-	hideButtons();
-	function hideButtons(){
-		var uloga = readCookie("uloga");
+	
+	//hideButtons();
+	function hideButtons(uloga){
+		
 		if(uloga!=="ADMIN"){
 			var dodajProjekcijuAdmin = $('#dodajProjekcijuAdmin');
 			dodajProjekcijuAdmin.hide();
@@ -37,13 +28,15 @@ $(document).ready(function() {
 	}
 	ajaxGet();
 	function ajaxGet() {
-		var uloga = readCookie("uloga");
+		
 		$.ajax({
 			type : "GET",
 			url : "http://localhost:8080/Cinema/ProjekcijaServlet",
 			success : function(result) {
 				if (result.status == "success") {
 					var list = result.dataList;
+					var uloga = result.uloga;
+					hideButtons(uloga);
 					var content="";
 					content+='<table width="50%" border="1">';
 					

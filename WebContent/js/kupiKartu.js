@@ -1,20 +1,9 @@
 $(document).ready(function() {
-
-	function readCookie(name){
-		var nameEQ = name + "=";
-		var ca = document.cookie.split(';');
-		for(var i=0; i<ca.length;i++){
-			var c = ca[i];
-			while (c.charAt(0)==' ') c = c.substring(1,c.length);
-			if(c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-		}
-		return null;
-	}
 	
 	
 	ajaxGet();
 	function ajaxGet() {
-		var idProjekcija = readCookie("idProjekcija");
+		var idProjekcija = window.location.search.slice(1).split('?')[0].split('=')[1];
 		alert("idProjekcija" + idProjekcija);
 		$.ajax({
 			type : "GET",
@@ -50,8 +39,8 @@ $(document).ready(function() {
 
     	
     	var sedistaInput = $('#sedista').val();
-    	var idProjekcija = readCookie("idProjekcija");
-    	var idKorisnik = readCookie("ulogovaniKorisnik");
+    	var idProjekcija = window.location.search.slice(1).split('?')[0].split('=')[1];
+    	
     	console.log(sedistaInput + " <--- ");
         // DO POST
         $.ajax({
@@ -60,8 +49,8 @@ $(document).ready(function() {
             url : "http://localhost:8080/Cinema/KupiKartuServlet",
             data : {
 				'sedistaInput' : sedistaInput.toString(),
-				'idProjekcija' : idProjekcija,
-				"idKorisnik" : idKorisnik
+				'idProjekcija' : idProjekcija
+				//,"idKorisnik" : idKorisnik
 			},
            
             success : function(result) {

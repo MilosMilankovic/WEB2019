@@ -55,9 +55,10 @@ public class LoginServlet extends HttpServlet {
 			}
 			*/
 			else { 
-			HttpSession session = request.getSession();
-			session.setAttribute("ulogovanKorisnik", korisnik.getKorisnickoIme());
-			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
+				request.getSession().setAttribute("ulogovanKorisnik", korisnik);
+				request.getSession().setAttribute("ulogovaniKorisnik", korisnik.getKorisnickoIme());
+				request.getSession().setAttribute("uloga", korisnik.getUloga());
+				request.getRequestDispatcher("./SuccessServlet").forward(request, response);
 			}
 		/*
 		}catch (Exception ex) {
@@ -81,6 +82,8 @@ public class LoginServlet extends HttpServlet {
 	
 		Map<String, Object> data = new HashMap<>();
 		data.put("status", status);
+		data.put("uloga", request.getSession().getAttribute("uloga"));
+		data.put("ulogovaniKorisnik", request.getSession().getAttribute("ulogovaniKorisnik"));
 		/*if(korisnik!=null) {
 			System.out.println("ulogovaniKorisnik" + korisnik.getId());
 			data.put("ulogovaniKorisnik", korisnik.getId());

@@ -44,6 +44,8 @@ public class FilmoviServlet extends HttpServlet {
 			Map<String, Object> data = new HashMap<>();
 			data.put("status", "success");
 			data.put("dataList", filmovi);
+			data.put("uloga", request.getSession().getAttribute("uloga"));
+			data.put("ulogovaniKorisnik", request.getSession().getAttribute("ulogovaniKorisnik"));
 
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonData = mapper.writeValueAsString(data);
@@ -102,6 +104,8 @@ public class FilmoviServlet extends HttpServlet {
 
 		Map<String, Object> data = new HashMap<>();
 		data.put("status", status);
+		data.put("uloga", request.getSession().getAttribute("uloga"));
+		data.put("ulogovaniKorisnik", request.getSession().getAttribute("ulogovaniKorisnik"));
 
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonData = mapper.writeValueAsString(data);

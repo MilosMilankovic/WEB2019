@@ -11,33 +11,22 @@ function obrisiFilm(idFilm){
 
 function izmeniFilm(idFilm){
 	
-	document.cookie = "idFilm="+idFilm;
-	$(location).attr('href','http://localhost:8080/Cinema/izmeniFilm.html')
+	
+	$(location).attr('href','http://localhost:8080/Cinema/izmeniFilm.html?id='+idFilm)
 };
 
 function projekcijeZaFilm(idFilm){
 	
-	document.cookie = "idFilm="+idFilm;
-	$(location).attr('href','http://localhost:8080/Cinema/projekcijeZaFilm.html')
+	
+	$(location).attr('href','http://localhost:8080/Cinema/projekcijeZaFilm.html?id='+idFilm)
 };
 
-$(document).ready(function() {
+$(document).ready(function() {	
 	
-	
-	function readCookie(name){
-		var nameEQ = name + "=";
-		var ca = document.cookie.split(';');
-		for(var i=0; i<ca.length;i++){
-			var c = ca[i];
-			while (c.charAt(0)==' ') c = c.substring(1,c.length);
-			if(c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-		}
-		return null;
-	}
-	
-	hideButtons();
-	function hideButtons(){
-		var uloga = readCookie("uloga");
+	//hideButtons();
+	function hideButtons(uloga){
+		
+		
 		if(uloga!=="ADMIN"){
 			var dodajFilmAdmin = $('#dodajFilmAdmin');
 			dodajFilmAdmin.hide();
@@ -47,15 +36,21 @@ $(document).ready(function() {
 	
 	ajaxGet();
 	function ajaxGet() {
-		var idFilm = readCookie("idFilm");
-		var uloga = readCookie("uloga");
-		alert("idFilm" + idFilm);
+		//alert("ajaxget");
+		
+		var idFilm = window.location.search.slice(1).split('?')[0].split('=')[1];
+		console.log("id film from href -> " + idFilm);
+		
+		//alert("idFilm" + idFilm);
 		$.ajax({
 			type : "GET",
 			url : "http://localhost:8080/Cinema/FilmServlet?idFilm="+idFilm,
 			success : function(result) {
 				if (result.status == "success") {
 					var item = result.data;
+					var uloga = result.uloga;
+					hideButtons(uloga);
+					var ulogovaniKorisnik = result.ulogovaniKorisnik;
 					var content="";
 					content+='<table width="50%" border="1">';
 					
@@ -95,6 +90,3 @@ $(document).ready(function() {
 	}
 
 });
-
-
-

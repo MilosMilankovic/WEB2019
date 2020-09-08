@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dao.KartaDAO;
 import model.Karta;
+import model.Korisnik;
 
 /**
  * Servlet implementation class KupiKartuServlet
@@ -46,7 +47,8 @@ public class KupiKartuServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String sedistaInput = request.getParameter("sedistaInput");
 		String idProjekcija = request.getParameter("idProjekcija");
-		String idKorisnik = request.getParameter("idKorisnik");
+		Korisnik korisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
+		String idKorisnik = String.valueOf(korisnik.getId());
 		
 		String[] sedista = sedistaInput.split(Pattern.quote(","));
 		String status = "success";
@@ -75,6 +77,8 @@ public class KupiKartuServlet extends HttpServlet {
 		
 		Map<String, Object> data = new HashMap<>();
 		data.put("status", status);
+		data.put("uloga", request.getSession().getAttribute("uloga"));
+		data.put("ulogovaniKorisnik", request.getSession().getAttribute("ulogovaniKorisnik"));
 
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonData = mapper.writeValueAsString(data);
