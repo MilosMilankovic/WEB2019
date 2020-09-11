@@ -20,10 +20,8 @@ $(document).ready(function() {
 		if(uloga!=="ADMIN"){
 			var korisnikAdmin = $('#korisniciAdmin');
 			var dodajFilmAdmin = $('#dodajFilmAdmin');
-			var dodajProjekcijuAdmin = $('#dodajProjekcijuAdmin');
 			korisnikAdmin.hide();
 			dodajFilmAdmin.hide();
-			dodajProjekcijuAdmin.hide();
 		}
 		if(uloga!="KORISNIK"){
 			var korisnikKorisnik = $('#korisnikKorisnik');

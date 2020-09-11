@@ -21,6 +21,12 @@ function projekcijeZaFilm(idFilm){
 	$(location).attr('href','http://localhost:8080/Cinema/projekcijeZaFilm.html?id='+idFilm)
 };
 
+function dodajProjekciju(idFilm){
+	
+	
+	$(location).attr('href','http://localhost:8080/Cinema/dodajprojekciju.html?id='+idFilm)
+};
+
 $(document).ready(function() {	
 	
 	//hideButtons();
@@ -55,7 +61,7 @@ $(document).ready(function() {
 					content+='<table width="50%" border="1">';
 					
 					if(uloga==="ADMIN"){
-						content+='<tr><td>naziv</td><td>zanrovi</td><td>glumci</td><td>reziser</td><td>trajanje</td><td>distributer</td><td>zemljaPorekla</td><td>godinaProizvodnje</td><td>Obrisi</td><td>Menjaj</td><td>Projekcije</td></tr>'
+						content+='<tr><td>naziv</td><td>zanrovi</td><td>glumci</td><td>reziser</td><td>trajanje</td><td>distributer</td><td>zemljaPorekla</td><td>godinaProizvodnje</td><td>Obrisi</td><td>Menjaj</td><td>Dodaj projekciju</td><td>Projekcije</td></tr>'
 					}else{
 						content+='<tr><td>naziv</td><td>zanrovi</td><td>glumci</td><td>reziser</td><td>trajanje</td><td>distributer</td><td>zemljaPorekla</td><td>godinaProizvodnje</td><td>Projekcije</td></tr>'
 							
@@ -76,6 +82,7 @@ $(document).ready(function() {
 						if(uloga==="ADMIN"){
 							content+='<td> <button id="' + item.id + '" onClick="obrisiFilm('+item.id+')">Obrisi film</button></td>';
 							content+='<td> <button id="' + item.id + '" onClick="izmeniFilm('+item.id+')">Izmeni film</button></td>';
+							content+='<td> <button id="' + item.id + '" onClick="dodajProjekciju('+item.id+')">Dodaj projekciju</button></td>';
 						}
 						
 						content+='<td> <button id="' + item.id + '" onClick="projekcijeZaFilm('+item.id+')">Ucitaj projekcije</button></td>';

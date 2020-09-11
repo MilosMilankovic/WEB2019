@@ -7,18 +7,27 @@ $( document ).ready(function() {
 	ajaxGet();
 	function ajaxGet() {
 		var idKorisnik = window.location.search.slice(1).split('?')[0].split('=')[1];
-		alert("idKorisnik" + idKorisnik);
+		//alert("idKorisnik" + idKorisnik);
 		$.ajax({
 			type : "GET",
 			url : "http://localhost:8080/Cinema/KorisnikServlet?idKorisnik="+idKorisnik,
 			success : function(result) {
 				if (result.status == "success") {
 					var item = result.data;
+					var ulogaRes = result.uloga;
 					//alert(item.ime);
 					
 					 $("#imeInput").val(item.korisnickoIme);
 			         $("#lozinkaInput").val(item.lozinka);
-			         $("#ulogaInput").val(item.uloga);
+			         var uloga = item.uloga;
+			         var ulogaInput = $('#ulogaInput');
+			         if(ulogaRes === "ADMIN"){
+			        	 ulogaInput.css("display","block");
+			        	 $("#ulogaLabel").css("display","block");
+			        	 //ulogaInput.show();
+			        	 //$('#ulogaLabel').show();
+			         }
+			         ulogaInput.val(item.uloga);
 						
 				}
 			}

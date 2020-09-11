@@ -26,6 +26,7 @@ $(document).ready(function() { // izvršava se nakon što se izgradi DOM stablo 
 			if (data.status == 'failure') {
 				userNameInput.val('');
 				passwordInput.val('');
+				alert("Korisnik nije pronadjen, molimo unesite ispravne kredencijale");
 				messageParagraph.text(data.message);
 				return;
 			}

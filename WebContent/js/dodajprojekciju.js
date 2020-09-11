@@ -1,7 +1,9 @@
 
 
 $( document ).ready(function() {
-       
+	var idFilm = window.location.search.slice(1).split('?')[0].split('=')[1];
+	//alert(idFilm);
+	$('#filmInput').val(idFilm);
         $("#DodajProjekciju").submit(function(event) {
             
             event.preventDefault();
@@ -10,8 +12,11 @@ $( document ).ready(function() {
 
 
         function ajaxPost(){
-
+        	
+        	//var idFilm = window.location.search.slice(1).split('?')[0].split('=')[1];
+        	//alert(idFilm);
         	var filmInput = $('#filmInput');
+        	//$('#filmInput').val(idFilm);
         	var tipProjekcijeInput = $('#tipProjekcijeInput');
         	var salaInput = $('#salaInput');
         	
