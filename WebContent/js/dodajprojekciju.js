@@ -1,9 +1,41 @@
 
 
 $( document ).ready(function() {
-	var idFilm = window.location.search.slice(1).split('?')[0].split('=')[1];
-	//alert(idFilm);
-	$('#filmInput').val(idFilm);
+		
+	ajaxGet();
+	function ajaxGet() {
+		$.ajax({
+			type : "GET",
+			url : "http://localhost:8080/Cinema/FilmoviServlet",
+			success : function(result) {
+				if (result.status == "success") {
+					var list = result.dataList;
+					
+					var content="";
+					content+='<td align="right">Filmovi:</td><td>';
+					content+='<select id="filmoviInput" name="filmovi">';
+						
+					
+					var options_str = "";
+					list.forEach( function(film) {
+						  options_str += '<option value="' + film.id + '">' + film.naziv + '</option>';
+					});
+					console.log("opcije " + options_str);
+					content+=options_str;
+					content+='<select></td>';
+					
+					console.log("content"+content)
+					$("#film").append(content);
+					
+					var uloga = result.uloga;
+					console.log("ucitana lista"+list);
+					var ulogovaniKorisnik = result.ulogovaniKorisnik;
+						
+				}
+			}
+		});
+	}
+	
         $("#DodajProjekciju").submit(function(event) {
             
             event.preventDefault();
@@ -12,11 +44,7 @@ $( document ).ready(function() {
 
 
         function ajaxPost(){
-        	
-        	//var idFilm = window.location.search.slice(1).split('?')[0].split('=')[1];
-        	//alert(idFilm);
-        	var filmInput = $('#filmInput');
-        	//$('#filmInput').val(idFilm);
+        	var filmInput = $('#filmoviInput');
         	var tipProjekcijeInput = $('#tipProjekcijeInput');
         	var salaInput = $('#salaInput');
         	

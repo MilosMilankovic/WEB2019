@@ -17,6 +17,13 @@ $(document).ready(function() {
 	//hideButtons();
 	function hideButtons(uloga){
 		console.log("Uloga je " + uloga)
+		if(uloga){
+			var loginBtn = $('#loginBtn');
+			loginBtn.hide();
+		}else{
+			var logoutBtn = $('#logoutBtn');
+			logoutBtn.hide();
+		}
 		if(uloga!=="ADMIN"){
 			var korisnikAdmin = $('#korisniciAdmin');
 			var dodajFilmAdmin = $('#dodajFilmAdmin');

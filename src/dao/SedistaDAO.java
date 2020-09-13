@@ -22,9 +22,10 @@ public class SedistaDAO {
 		ResultSet rset = null;
 		ArrayList<Sediste> sedista = new ArrayList<Sediste>();
 		try {
-			String query = "SELECT redni_broj, sala FROM sediste as s where s.redni_broj not in (SELECT sediste FROM karta as k where k.projekcijaId = ?)";
+			String query = "SELECT redni_broj, sala FROM sediste as s where s.sala = ? AND s.redni_broj not in (SELECT sediste FROM karta as k where k.projekcijaId = ?)";
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, idProjekcija);
+			pstmt.setInt(1, ProjekcijaDAO.get(idProjekcija).getSala());
+			pstmt.setInt(2, idProjekcija);
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {

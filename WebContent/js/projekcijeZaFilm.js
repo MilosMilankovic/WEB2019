@@ -18,6 +18,8 @@ $(document).ready(function() {
 			success : function(result) {
 				if (result.status == "success") {
 					var list = result.dataList;
+					var filmoviList = result.filmoviSaProjekcijaList;
+					var tipoviProjekcijaList =  result.tipoviProjekcija;
 					var uloga = result.uloga;
 					var content="";
 					content+='<table width="50%" border="1">';
@@ -33,12 +35,25 @@ $(document).ready(function() {
 						var item = list[i];
 						console.log(item.film);
 						content+='<tr>';
-						content+='<td>' + item.film + '</td>';
+						//content+='<td>' + item.film + '</td>';
+						for(var j=0, sizeOfList=filmoviList.length; j < sizeOfList; j++){
+							var film = filmoviList[j];
+							if(film.id === item.film){
+								content+='<td><a href="http://localhost:8080/Cinema/film.html?id=' +  item.film +'"> '+ film.naziv+ '</a></td>';
+								break;
+							}
+						}
 						var date = new Date(item.datumIvreme);
 						
 
 						content+='<td>' + date.toLocaleString() + '</td>';
-						content+='<td>' + item.tipProjekcije + '</td>';
+						for(var j=0, sizeOfList=tipoviProjekcijaList.length; j < sizeOfList; j++){
+							var tipProjekcije = tipoviProjekcijaList[j];
+							if(tipProjekcije.id === item.tipProjekcije){
+								content+='<td>' + tipProjekcije.naziv + '</td>';
+								break;
+							}
+						}
 						content+='<td>' + item.sala + '</td>';
 						content+='<td>' + item.cenaKarte + '</td>';
 						if (uloga==="KORISNIK"){

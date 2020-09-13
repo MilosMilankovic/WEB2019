@@ -67,6 +67,10 @@ public class DodajProjekcijuServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		if(datumIvremed.before(new Date())) {
+			status = "failure";
+		}
 
 		String cena = request.getParameter("cenaKarte");
 		int cenaint = Integer.parseInt(cena);
@@ -74,7 +78,7 @@ public class DodajProjekcijuServlet extends HttpServlet {
 		int salaint = Integer.parseInt(sala);
 
 		Korisnik korisnikUlogovani = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
-		if (korisnikUlogovani.getUloga().equals(Uloga.ADMIN.toString())) {
+		if (status.equals("success") && korisnikUlogovani.getUloga().equals(Uloga.ADMIN.toString())) {
 			Projekcija p = new Projekcija(0, filmint, tipProjekcijeint, salaint, datumIvremed, cenaint, 4, false);
 			ProjekcijaDAO.add(p);
 		} else {

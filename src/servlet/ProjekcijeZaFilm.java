@@ -13,8 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import dao.FilmDAO;
 import dao.ProjekcijaDAO;
+import dao.TipProjekcijeDAO;
+import model.Film;
 import model.Projekcija;
+import model.TipProjekcije;
 
 /**
  * Servlet implementation class ProjekcijeZaFilm
@@ -39,10 +43,19 @@ public class ProjekcijeZaFilm extends HttpServlet {
 		List<Projekcija> projekcije = new ArrayList<>();
 		try {
 			projekcije = ProjekcijaDAO.projekcijeZaFilm(idFilm);
+			List<Film> filmoviSaProjekcija = new ArrayList<>();
+			for(Projekcija p:projekcije) {
+				int idFilma = p.getFilm();
+				Film film = FilmDAO.get(idFilma);
+				filmoviSaProjekcija.add(film);
+			}
+			List<TipProjekcije> tipoviProjekcija = TipProjekcijeDAO.getAll();
 			System.out.println(projekcije);
 			Map<String, Object> data = new HashMap<>();
 			data.put("status", "success");
 			data.put("dataList", projekcije);
+			data.put("filmoviSaProjekcijaList", filmoviSaProjekcija);
+			data.put("tipoviProjekcija", tipoviProjekcija);
 			data.put("uloga", request.getSession().getAttribute("uloga"));
 			data.put("ulogovaniKorisnik", request.getSession().getAttribute("ulogovaniKorisnik"));
 			ObjectMapper mapper = new ObjectMapper();

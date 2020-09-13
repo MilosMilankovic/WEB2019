@@ -87,6 +87,15 @@ public class Projekcija {
 	public void setObrisan(boolean obrisan) {
 		this.obrisan = obrisan;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "Projekcija [id=" + id + ", film=" + film + ", tipProjekcije=" + tipProjekcije + ", sala=" + sala
+				+ ", datumIvreme=" + datumIvreme + ", cenaKarte=" + cenaKarte + ", administrator=" + administrator
+				+ ", obrisan=" + obrisan + "]";
+	}
 	
 	
 	

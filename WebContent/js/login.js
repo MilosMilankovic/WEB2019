@@ -26,12 +26,13 @@ $(document).ready(function() { // izvršava se nakon što se izgradi DOM stablo 
 			if (data.status == 'failure') {
 				userNameInput.val('');
 				passwordInput.val('');
-				alert("Korisnik nije pronadjen, molimo unesite ispravne kredencijale");
+				alert("Korisnik nije pronadjen, molimo unesite ispravne podatke");
 				messageParagraph.text(data.message);
 				return;
 			}
 			if (data.status == 'success') {
-				window.location.replace('index.html');
+				console.log("UsAO U PROJEKCIJE")
+				window.location.replace('projekcije.html');
 			}
 		});
 		// program se odmah nastavlja dalje, pre nego što stigne odgovor

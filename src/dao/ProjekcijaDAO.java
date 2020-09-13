@@ -117,22 +117,33 @@ public class ProjekcijaDAO {
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
-
-				int index = 1; // iz baze
-				int film = rset.getInt(index);
+				int index = 1;
+				Integer idProjekcije = rset.getInt(index++);
+				int film = rset.getInt(index++);
 				Integer tipProjekcije = rset.getInt(index++);
 				Integer sala = rset.getInt(index++);
-				Date datumIvreme = rset.getDate(index++);
+				String time = rset.getString(index++);
+				System.out.println("time->" + time);
+
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+				Date datumIvreme = sdf.parse(time);
+				System.out.println("date->" + datumIvreme);
+				// Date datumIvreme = rset.getDate(index++);
 				Integer cenaKarte = rset.getInt(index++);
 				Integer administrator = rset.getInt(index++);
 				Boolean obrisan = rset.getBoolean(index++);
 
-				return new Projekcija(id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan);
+				return new Projekcija(idProjekcije, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan);
+				
 			}
 
 		} catch (SQLException ex) {
 			System.out.println("Greska u SQL upitu");
 			ex.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			try {
 				pstmt.close();
