@@ -1,3 +1,12 @@
+function logout(){
+	alert("logout")
+	
+	$.get('http://localhost:8080/Cinema/LogOutServlet', {},function(data) {
+		if(data.status == "success"){
+				$(location).attr('href', 'http://localhost:8080/Cinema/login.html');
+		}
+	})
+}
 
 
 $( document ).ready(function() {

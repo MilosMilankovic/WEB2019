@@ -1,5 +1,7 @@
 
-
+drop database if exists filmovi2;
+create database filmovi2;
+use filmovi2;
 
 
 
@@ -12,10 +14,10 @@ CREATE TABLE korisnik (
            obrisan BOOLEAN NOT NULL
 );
 
-INSERT INTO korisnik (korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES ('milos', 'milos', '2019-12-18T10:15:10', 'korisnik', false);
-INSERT INTO korisnik (korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES ('lazar', 'lazar', '2019-12-18T11:15:10', 'korisnik', false);
-INSERT INTO korisnik (korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES ('nikola', 'nikola', '2019-12-18T12:15:10', 'korisnik', false);
-INSERT INTO korisnik (korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES ('pera', 'pera', '2019-12-18T12:15:10', 'admin', false);
+INSERT INTO korisnik (korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES ('milos', 'milos', '2020-9-11T10:15:10', 'korisnik', false);
+INSERT INTO korisnik (korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES ('lazar', 'lazar', '2020-9-11T11:16:10', 'korisnik', false);
+INSERT INTO korisnik (korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES ('nikola', 'nikola', '2020-1218T12:15:10', 'korisnik', false);
+INSERT INTO korisnik (korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES ('admin', 'admin', '2020-9-18T12:15:10', 'admin', false);
 
 create table film (
 	id INTEGER PRIMARY KEY,
@@ -31,10 +33,16 @@ create table film (
     obrisan boolean not null
 );
 
-INSERT INTO film (naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan) VALUES ( "balkanska medja", "milos", "miloss, lazar", "akcija", 100, "rts", "srbija", 2019, "dobar", false);
-INSERT INTO film (naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan) VALUES ( " hari poter", "lazar", "mpera, peric", "avanturisticki", 150, "rts", "srbija", 2010, "solidan", false);
-INSERT INTO film (naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan) VALUES ( "x- men", "djoka", "djoka, lazar", "akcija", 100, "rts", "srbija", 2019, "dobar", false);
-
+INSERT INTO film (naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan) VALUES ( "Jos uvek verujem", "Andrew Erwin", "K.J. Apa, Britt Robertson", "drama", 115, "Blitz Film", "USA", 2020, "Džeremi Kamp iza sebe ima dvanaestogodišnje muzièko iskustvo i brojna priznanja i ostvarenja, preko èetiri milijona prodatih albuma, tri nominacije za American Music Awards i nominaciju za Grammy, a nastupao je u više od trideset zemalja sveta", false);
+INSERT INTO film (naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan) VALUES ( "Novi Mutanti", "Josh Boone", "Maisie Williams, Anya Taylor-Joy", "akcija", 94, " MCF MegaCom Film", "USA", 2020, "20th Century Studio u saradnji sa Marvel Entertaiment predstavlja film Novi mutanti,", false);
+INSERT INTO film (naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan) VALUES ( "Tenet", "Christopher Nolan", "Aaron Taylor-Johnson, Robert Pattinson", "akcija", 150, "Blitz Film", "USA", 2019, "Džon David Vašington glavni je protagonista novog Sci-Fi akcijskog spektakla Kristofera Nolana, kratkog, ali jasnog naziva “Tenet.", false);
+INSERT INTO film (naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan) VALUES ( "Mulan", "Niki Caro", "Yifei Liu, Donnie Yen", "avantura", 110, "MCF MegaCom Film", "USA", 2019, "Kada kineski car pošalje dekret u kome piše da svaka porodica mora da pošalje jednog èlana koji æe se pridružiti Carskoj vojsci u odbrani zemlje od osvajaèa sa severa", false);
+INSERT INTO film (naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan) VALUES ( "Van kontrole", "Derrick Borte", "Russell Crowe, Jimmi Simpson", "triler", 90, "Blitz Film", "USA", 2019, "Svakodnevni odlazak na posao za Rejèel se pretvorio u noænu moru kad je u saobraæajnoj gužvi naletela na stranca sa kojim je zapoèela svaðu jer je odbila da se pomeri.", false);
+INSERT INTO film (naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan) VALUES ( "Kralj Ostrva", "Judd Apatow", "Pete Davidson, Bel Powley", "komedija", 136, "Taramount film", "USA", 2019, "Skot (Dejvidson) je imao smetnje u razvoju još od svoje sedme godine, kada mu je poginuo otac, vatrogasac.", false);
+INSERT INTO film (naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan) VALUES ( "Istina", "Hirokazo Koreeda", "Catherine Deneuve, Juliette Binoche", "drama", 106, "MCF MegaCom Film", "FRA", 2020, "Po objavljivanju Fabijeninih memoara, njena kæerka Lumir dolazi iz Njujorka u Pariz kako bi proslavile taj dogaðaj.", false);
+INSERT INTO film (naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan) VALUES ( "Zov divljine", "Chris Sanders", "Harrison Ford, Dan Stevens, ", "avantura", 90, "Blitz Film", "USA", 2019, "Kao novajlija zaposlen u ekipi pasa koji vuku sanke za dostavljanje pošte, a kasnije i voða tima.", false);
+INSERT INTO film (naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan) VALUES ( "Nevidljivi covek", "Leigh Whannell", "Elisabeth Moss, Aldis Hodge", "horor", 125, "Taramount film", "AUS", 2020, "Zarobljena u nasilnoj vezi sa bogatim i briljantnim nauènikom koji je kontroliše.", false);
+INSERT INTO film (naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan) VALUES ( "Losi momci zauvek", "Adil El Arbi", "Will Smith, Martin Lawrence,", "akcija", 120, " 	CON FILM D.O.O.", "USA", 2019, "Loši momci Majk Lori (Vil Smit) i Markus Barnet (Martin Lorens) su opet zajedno u još jednoj ludoj vožnji,", false);
 
 create table tip_projekcije
 (
@@ -89,9 +97,24 @@ create table projekcija
 
 
 
-INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (1,1,1, '2020-2-16T12:15:10', 300, 4, false);
-INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (2,2,2, '2020-2-16T12:16:10', 250, 4, false);
-INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (3,3,3, '2020-2-16T12:17:30', 350, 4, false);
+INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (1,1,1, '2020-9-14T16:30:10', 300, 4, false);
+INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (1,2,2, '2020-9-14T20:30:10', 300, 4, false);
+INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (2,1,1, '2020-9-14T13:30:30', 350, 4, false);
+INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (2,2,2, '2020-9-14T19:30:30', 350, 4, false);
+INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (3,3,3, '2020-9-14T16:30:30', 400, 4, false);
+INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (3,3,3, '2020-9-14T20:30:30', 400, 4, false);
+INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (1,1,1, '2020-9-15T16:30:10', 300, 4, false);
+INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (1,2,2, '2020-9-15T20:30:10', 300, 4, false);
+INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (2,1,1, '2020-9-15T16:30:30', 350, 4, false);
+INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (2,2,2, '2020-9-15T19:30:30', 350, 4, false);
+INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (3,3,3, '2020-9-15T16:30:30', 400, 4, false);
+INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (3,3,3, '2020-9-15T20:30:30', 400, 4, false);
+INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (1,1,1, '2020-9-16T16:30:10', 300, 4, false);
+INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (1,2,2, '2020-9-16T20:30:10', 300, 4, false);
+INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (2,1,1, '2020-9-16T13:30:30', 350, 4, false);
+INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (2,2,2, '2020-9-16T19:30:30', 350, 4, false);
+INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (3,3,3, '2020-9-16T16:30:30', 400, 4, false);
+INSERT INTO projekcija(film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (3,3,3, '2020-9-16T20:30:30', 400, 4, false);
 
 create table karta
 (

@@ -1,0 +1,222 @@
+--
+-- File generated with SQLiteStudio v3.2.1 on pon feb 10 20:57:03 2020
+--
+-- Text encoding used: System
+--
+PRAGMA foreign_keys = off;
+BEGIN TRANSACTION;
+
+-- Table: film
+DROP TABLE IF EXISTS film;
+
+CREATE TABLE film (
+    id                INTEGER      PRIMARY KEY AUTOINCREMENT,
+    naziv             VARCHAR (50) NOT NULL,
+    reziser           VARCHAR (50),
+    glumci            VARCHAR (50),
+    zanrovi           VARCHAR (50),
+    trajanje          INTEGER      NOT NULL,
+    distributer       VARCHAR (50) NOT NULL,
+    zemljaPorekla     VARCHAR (50) NOT NULL,
+    godinaProizvodnje INTEGER      NOT NULL,
+    opis              VARCHAR (50),
+    obrisan           BOOLEAN      DEFAULT (0) 
+);
+
+INSERT INTO film (id, naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan) VALUES (1, 'balkanska medja', 'milos', 'miloss, lazar', 'komedija', 100, 'rts', 'srbija', 2019, 'dobaraaaa', 0);
+INSERT INTO film (id, naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan) VALUES (2, ' hari poter', 'lazar', 'mpera, peric', 'avanturisticki', 150, 'rts', 'srbija', 2010, 'solidan', 1);
+INSERT INTO film (id, naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan) VALUES (19, 'f', 'fd', 'df', 'fd', 120, 'ad', 'daaa', 11, 'adwadwadwada1', 1);
+INSERT INTO film (id, naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, obrisan) VALUES (21, 'cernobiljaa', 'a', 'a', 'drama', 150, 'ff', 'cc', 2019, 'dramaaa', 0);
+
+-- Table: karta
+DROP TABLE IF EXISTS karta;
+
+CREATE TABLE karta (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    projekcijaId    INTEGER NOT NULL,
+    sediste         INTEGER NOT NULL,
+    datumIvreme     DATE    NOT NULL
+                            DEFAULT ( (datetime('now', 'localtime') ) ),
+    obican_korisnik INTEGER NOT NULL,
+    obrisan         BOOLEAN NOT NULL,
+    FOREIGN KEY (
+        projekcijaId
+    )
+    REFERENCES projekcija (id),
+    FOREIGN KEY (
+        sediste
+    )
+    REFERENCES sediste (redni_broj),
+    FOREIGN KEY (
+        obican_korisnik
+    )
+    REFERENCES korisnik (id) 
+);
+
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (1, 1, 1, '2020-2-16T12:15:00', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (2, 1, 2, '2020-2-16T12:16:00', 2, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (3, 1, 3, '2020-2-16T12:17:10', 3, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (9, 13, 1, '2020-02-03 21:50:13', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (10, 14, 2, '2020-02-03 21:51:56', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (11, 14, 3, '2020-02-03 21:53:01', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (12, 17, 1, '2020-02-03 22:14:59', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (14, 18, 3, '2020-02-04 21:02:15', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (15, 1, 6, '2020-02-04 21:24:05', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (17, 15, 1, '2020-02-04 22:28:40', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (18, 15, 2, '2020-02-04 22:28:40', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (19, 15, 4, '2020-02-04 22:34:04', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (20, 21, 1, '2020-02-06 17:25:14', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (21, 23, 1, '2020-02-06 17:37:02', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (22, 22, 3, '2020-02-06 17:39:09', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (23, 24, 1, '2020-02-06 18:23:09', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (24, 22, 1, '2020-02-06 18:24:36', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (25, 25, 1, '2020-02-06 18:25:01', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (26, 26, 1, '2020-02-07 16:52:13', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (27, 28, 1, '2020-02-09 17:26:49', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (28, 1, 4, '2020-02-10 15:32:14', 8, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (29, 29, 1, '2020-02-10 15:40:12', 1, 0);
+INSERT INTO karta (id, projekcijaId, sediste, datumIvreme, obican_korisnik, obrisan) VALUES (30, 31, 1, '2020-02-10 16:09:46', 1, 0);
+
+-- Table: korisnik
+DROP TABLE IF EXISTS korisnik;
+
+CREATE TABLE korisnik (
+    id                INTEGER      PRIMARY KEY,
+    korisnickoIme     VARCHAR (50) NOT NULL
+                                   UNIQUE,
+    lozinka           VARCHAR (50) NOT NULL,
+    datumRegistracije DATE         NOT NULL
+                                   DEFAULT ( (datetime('now', 'localtime') ) ),
+    uloga             VARCHAR (50),
+    obrisan           BOOLEAN      NOT NULL
+);
+
+INSERT INTO korisnik (id, korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES (1, 'milos', 'milos', '2020-01-16 18:45:58', 'KORISNIK', 0);
+INSERT INTO korisnik (id, korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES (2, 'lazar', 'lazar', '2020-01-16 18:45:58', 'KORISNIK', 0);
+INSERT INTO korisnik (id, korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES (3, 'nikola', 'nikola', '2020-01-16 18:45:58', 'KORISNIK', 1);
+INSERT INTO korisnik (id, korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES (4, 'pera', 'pera', '2020-01-16 18:45:58', 'ADMIN', 0);
+INSERT INTO korisnik (id, korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES (5, 'aca', 'aca', '2020-01-16 18:45:58', 'KORISNIK', 0);
+INSERT INTO korisnik (id, korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES (6, 'cx', 'c', '2020-01-20 19:13:46', 'KORISNIK', 0);
+INSERT INTO korisnik (id, korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES (7, 'jankoa', 'peraa', '2020-01-21 17:34:48', 'ADMIN', 0);
+INSERT INTO korisnik (id, korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES (8, '', '', '2020-01-21 17:36:14', 'KORISNIK', 0);
+INSERT INTO korisnik (id, korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES (9, 'li', 'li', '2020-01-21 17:37:02', 'KORISNIK', 1);
+INSERT INTO korisnik (id, korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES (10, 'n', 'n', '2020-01-26 22:45:32', 'KORISNIK', 1);
+INSERT INTO korisnik (id, korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES (11, 'x', '1', '2020-02-09 20:08:41', 'KORISNIK', 0);
+INSERT INTO korisnik (id, korisnickoIme, lozinka, datumRegistracije, uloga, obrisan) VALUES (12, 'c', '2', '2020-02-09 20:09:48', 'KORISNIK', 0);
+
+-- Table: projekcija
+DROP TABLE IF EXISTS projekcija;
+
+CREATE TABLE projekcija (
+    id            INTEGER PRIMARY KEY,
+    film          INTEGER NOT NULL,
+    tipProjekcije INTEGER NOT NULL,
+    sala          INTEGER NOT NULL,
+    datumIvreme   DATE    NOT NULL,
+    cenaKarte     DECIMAL NOT NULL,
+    administrator INTEGER NOT NULL,
+    obrisan       BOOLEAN NOT NULL,
+    FOREIGN KEY (
+        film
+    )
+    REFERENCES film (id),
+    FOREIGN KEY (
+        tipProjekcije
+    )
+    REFERENCES tip_projekcije (id),
+    FOREIGN KEY (
+        sala
+    )
+    REFERENCES sala (id),
+    FOREIGN KEY (
+        administrator
+    )
+    REFERENCES korisnik (id) 
+);
+
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (1, 1, 1, 1, '2020-01-28 18:30:58', 300, 4, 1);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (7, 1, 1, 1, '2020-01-01 01:01:00', 1, 4, 1);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (8, 1, 2, 1, '2020-01-28 03:02:00', 2, 4, 1);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (10, 2, 2, 1, '2020-01-30 04:00:00', 2, 4, 1);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (12, 2, 3, 1, '2020-01-29 01:01:00', 3, 4, 1);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (13, 1, 1, 1, '2020-02-05 02:00:00', 1, 4, 1);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (14, 1, 2, 1, '2020-02-11 01:01:00', 2, 4, 1);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (15, 1, 1, 1, '2020-02-19 02:00:00', 1, 4, 1);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (17, 1, 2, 1, '2020-02-05 01:01:00', 2, 4, 1);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (18, 1, 3, 1, '2020-02-04 01:01:00', 200, 4, 1);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (21, 1, 1, 2, '2020-02-13 21:00:00', 10, 4, 1);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (22, 1, 1, 1, '2020-02-20 15:00:00', 100, 4, 1);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (23, 1, 2, 1, '2020-02-04 10:00:00', 100, 4, 1);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (24, 1, 3, 1, '2020-02-20 15:00:00', 100, 4, 1);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (25, 1, 1, 1, '2020-02-26 20:00:00', 500, 4, 1);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (26, 19, 1, 1, '2020-02-24 18:00:00', 150, 4, 1);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (28, 1, 1, 1, '2020-02-25 18:00:00', 150, 4, 1);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (29, 21, 1, 1, '2020-02-25 18:00:00', 500, 4, 0);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (30, 21, 1, 1, '2020-02-25 18:30:00', 100, 4, 0);
+INSERT INTO projekcija (id, film, tipProjekcije, sala, datumIvreme, cenaKarte, administrator, obrisan) VALUES (31, 21, 1, 1, '2020-02-25 18:00:00', 350, 4, 0);
+
+-- Table: sala
+DROP TABLE IF EXISTS sala;
+
+CREATE TABLE sala (
+    id             INTEGER      PRIMARY KEY,
+    naziv          VARCHAR (50) NOT NULL,
+    tip_projekcije INTEGER      NOT NULL,
+    FOREIGN KEY (
+        tip_projekcije
+    )
+    REFERENCES tip_projekcije (id) 
+);
+
+INSERT INTO sala (id, naziv, tip_projekcije) VALUES (1, 'sala1', 1);
+INSERT INTO sala (id, naziv, tip_projekcije) VALUES (2, 'sala2', 2);
+INSERT INTO sala (id, naziv, tip_projekcije) VALUES (3, 'sala3', 3);
+
+-- Table: sediste
+DROP TABLE IF EXISTS sediste;
+
+CREATE TABLE sediste (
+    redni_broj INTEGER PRIMARY KEY,
+    sala       INTEGER NOT NULL,
+    FOREIGN KEY (
+        sala
+    )
+    REFERENCES sala (id) 
+);
+
+INSERT INTO sediste (redni_broj, sala) VALUES (1, 1);
+INSERT INTO sediste (redni_broj, sala) VALUES (2, 1);
+INSERT INTO sediste (redni_broj, sala) VALUES (3, 1);
+INSERT INTO sediste (redni_broj, sala) VALUES (4, 1);
+INSERT INTO sediste (redni_broj, sala) VALUES (5, 1);
+INSERT INTO sediste (redni_broj, sala) VALUES (6, 1);
+INSERT INTO sediste (redni_broj, sala) VALUES (7, 1);
+INSERT INTO sediste (redni_broj, sala) VALUES (8, 1);
+INSERT INTO sediste (redni_broj, sala) VALUES (20, 2);
+INSERT INTO sediste (redni_broj, sala) VALUES (21, 2);
+INSERT INTO sediste (redni_broj, sala) VALUES (22, 2);
+INSERT INTO sediste (redni_broj, sala) VALUES (23, 2);
+INSERT INTO sediste (redni_broj, sala) VALUES (24, 2);
+INSERT INTO sediste (redni_broj, sala) VALUES (25, 2);
+INSERT INTO sediste (redni_broj, sala) VALUES (26, 2);
+INSERT INTO sediste (redni_broj, sala) VALUES (27, 2);
+INSERT INTO sediste (redni_broj, sala) VALUES (28, 2);
+INSERT INTO sediste (redni_broj, sala) VALUES (30, 3);
+INSERT INTO sediste (redni_broj, sala) VALUES (31, 3);
+INSERT INTO sediste (redni_broj, sala) VALUES (32, 3);
+INSERT INTO sediste (redni_broj, sala) VALUES (34, 3);
+
+-- Table: tip_projekcije
+DROP TABLE IF EXISTS tip_projekcije;
+
+CREATE TABLE tip_projekcije (
+    id    INTEGER      PRIMARY KEY,
+    naziv VARCHAR (50) NOT NULL
+);
+
+INSERT INTO tip_projekcije (id, naziv) VALUES (1, '2D');
+INSERT INTO tip_projekcije (id, naziv) VALUES (2, '3D');
+INSERT INTO tip_projekcije (id, naziv) VALUES (3, '4D');
+
+COMMIT TRANSACTION;
+PRAGMA foreign_keys = on;
